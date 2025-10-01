@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Case Study — Modern Trade UA</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/assets/js/lang-switch.js" defer></script>
+  <script src="/script.js" defer></script>
+
+</head>
+<body>
+
+  <header class="header">
+    <div class="wrap">
+      <a href="index.html" class="logo">shevchenko<span class="dot">.</span>solutions</a>
+      <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+
+      <a class="cta-link" href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
+        WANT TO DISCUSS A SIMILAR CASE?
+      </a>
+
+      <nav class="nav">
+        <a class="nav-link" href="index.html#how-i-help">How I Help</a>
+        <a class="nav-link" href="index.html#pricing">Pricing</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
+        <a class="nav-link back-link" href="index.html#case-studies">Back to Cases</a>
+
+        <div class="lang-switch">
+          <button id="current-lang" type="button">
+            <img id="current-flag" src="/assets/flags/ENG.svg" alt="EN">
+            <span id="current-code">ENG</span> ▾
+          </button>
+          <ul id="lang-menu" class="hidden">
+            <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+            <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+            <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <h2>🦾 Case Study: Winning in Post-COVID Retail (Ukraine, 2021)</h2>
+
+      <div class="case-gallery">
+        <img src="/cases/c4.jpg" alt="Retail strategy" />
+        <img src="/cases/c4b.jpg" alt="Execution upgrade" />
+        <img src="/cases/c4c.jpg" alt="AI-driven performance" />
+      </div>
+
+      <h3>Overview</h3>
+      <p>In the aftermath of COVID-19, a leading brewing company in Ukraine - part of a major global group - not only survived repeated lockdowns but emerged stronger. Despite closures in HoReCa, the company maintained its #1 market position, increased profit, and safeguarded 1,300 jobs across three modern breweries. The retail landscape, however, had been transformed: modern trade surged to over 50% of the company’s business (up from 40% pre-pandemic), demanding a fundamental shift in strategy.</p>
+
+      <h3>Challenge: Swimming with Whales</h3>
+      <p>The shift towards modern trade exposed structural weaknesses:</p>
+      <p>1. Volatile performance in modern formats, heavily dependent on deep price promotions.</p>
+      <p>2. Strongholds in the east and west underrepresented in nationwide assortment matrices of retail chains.</p>
+      <p>3. Poor in-store execution and a sales team structure misaligned with new realities.</p>
+      <p>4. Service levels lagging behind top FMCG peers; logistics failing to meet customer expectations.</p>
+      <p>5. Retailers leveraging increased bargaining power to demand deeper discounts and longer credit - eroding profitability.</p>
+      <p>6. Intensified competition triggered a destructive 'promo spiral', where discounts moved share without growing the category.</p>
+
+      <h3>Approach: Fix the Fundamentals and Harness AI</h3>
+      <p><strong>My Role:</strong> CEO, reporting to the EVP Eastern Europe.</p>
+      <p>Recognizing that this was a business-critical transformation, I mobilized cross-functional teams across Sales, Marketing, Supply Chain, Finance, and IT. Our strategy combined back-to-basics discipline with technology-driven innovation:</p>
+      <p>1. Organizational reset: Shifted from geographic to customer-centric structure, revised segmentation by profitability, and re-engineered trade terms to stop financial leakage.</p>
+      <p>2. Service level upgrade: Built cross-functional account teams, giving Supply Chain and Finance direct customer-facing KPIs for satisfaction.</p>
+      <p>3. Promo strategy overhaul: Increased promo pressure from 35% to 42% of turnover, with focus on profitable SKUs and tailored customer needs, regaining in-store visibility without margin collapse.</p>
+      <p>4. AI-powered execution: Deployed machine learning image recognition (95% accuracy) via 580 field merchandisers, providing real-time insights on shelf presence, pricing, and out-of-stocks. Incentives were tied to objective AI data.</p>
+
+      <h3>Results: From Vulnerability to Strength</h3>
+      <p>1. Closed the market share gap to competitors in modern trade, achieving a solid #2 position.</p>
+      <p>2. Eliminated all loss-making customer accounts; restored profitability to breakeven or above.</p>
+      <p>3. Ranked #1 preferred supplier among all beverage producers by the independent “Advantage” agency - across sales, marketing, logistics, and product quality.</p>
+      <p>4. AI adoption delivered unprecedented visibility, agility, and precision in execution.</p>
+
+      <h3>Strategic Takeaways</h3>
+      <p>– Resilient companies don’t just survive disruption - they reshape around new market realities.</p>
+      <p>– Cross-functional integration is as critical as commercial strategy in modern trade.</p>
+      <p>– Smart use of AI can turn execution into a competitive weapon, not just a hygiene factor.</p>
+      <p>– Protecting profitability requires courage to reset terms and resist unsustainable demands.</p>
+
+      <h3>Closing Statement</h3>
+      <p>This case proved that disruption - whether from a pandemic or retail consolidation - can be an accelerator of transformation. By fixing fundamentals, mobilizing cross-functional discipline, and pioneering AI in retail execution, I transformed modern trade from the company’s weakest channel into a platform for long-term growth. It stands as evidence that even in crisis, strategic clarity and innovation can turn vulnerability into strength.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © <span id="y"></span> Evgeny Shevchenko. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
