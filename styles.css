@@ -481,3 +481,36 @@ a.link { color: var(--blue); text-decoration: underline; }
   padding: 5px 10px;
   white-space: nowrap;
 }
+/* Cookie banner */
+#cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 15px 20px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+}
+
+#cookie-banner p {
+  margin: 0;
+  max-width: 80%;
+}
+
+#cookie-banner button {
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#cookie-banner button:hover {
+  background: #45a049;
+}

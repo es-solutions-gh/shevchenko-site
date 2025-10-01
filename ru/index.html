@@ -557,4 +557,27 @@
   © <span id="y"></span> Евгений Шевченко. Все права защищены.
 </footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+<!-- Cookie Consent Banner -->
+<div id="cookie-banner" style="display:none;">
+  <p>We use cookies to improve your browsing experience. By continuing to visit this site you agree to our use of cookies.</p>
+  <button id="accept-cookies">Accept</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById("cookie-banner");
+    const acceptBtn = document.getElementById("accept-cookies");
+
+    if (!localStorage.getItem("cookiesAccepted")) {
+      banner.style.display = "flex";
+    }
+
+    acceptBtn.addEventListener("click", function () {
+      localStorage.setItem("cookiesAccepted", "true");
+      banner.style.display = "none";
+    });
+  });
+</script>
+<!-- /Cookie Consent Banner -->
+
 </body>
