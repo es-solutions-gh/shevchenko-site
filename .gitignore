@@ -1,1 +1,25 @@
+# macOS system files
 .DS_Store
+
+# VS Code settings
+.vscode/
+
+# Node/npm-related (на будущее)
+node_modules/
+dist/
+build/
+
+# Netlify build cache
+.netlify/
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.swp
+*.bak
+
+# OS junk
+Thumbs.db
+ehthumbs.db
