@@ -31,33 +31,41 @@
   <nav class="nav">
     <a href="#about-me">Обо мне</a>
     <a href="#how-i-help">С чем я помогаю</a>
-    <a href="#cases">Кейсы</a>
-    <a href="#testimonials">Отзывы</a>
+    <a href="#case-studies">Кейсы</a>
+    <a href="#what-clients-say">Отзывы</a>
     <a href="#pricing">Форматы и гонорар</a>
-    <a href="#press">Публикации</a>
+    <a href="#press-media">Публикации</a>
     <a href="#contact">Контакты</a>
   </nav>
 
-  <!-- Переключатель языка -->
+  <!-- Переключатель языка (десктоп) -->
   <div class="lang-switch desktop-only">
-    <button>
-      <img src="/assets/flags/RUS.svg" alt="RU" />
-      RU
+    <button id="current-lang-desktop" type="button">
+      <img id="current-flag-desktop" src="/assets/flags/RUS.svg" alt="RU">
+      <span id="current-code-desktop">RUS</span> ▾
     </button>
-    <ul class="hidden desktop-only">
-      <li onclick="window.location.href='/en/'">
-        <img src="/assets/flags/ENG.svg" alt="EN" />
-        EN
-      </li>
-      <li onclick="window.location.href='/uk/'">
-        <img src="/assets/flags/UKR.svg" alt="UA" />
-        UA
-      </li>
+    <ul id="lang-menu-desktop" class="hidden">
+      <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+      <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+      <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
     </ul>
   </div>
 
   <!-- Мобильная строка -->
-  <div class="mobile-header-row">...</div>
+  <div class="mobile-header-row">
+    <div class="lang-switch mobile-top">
+      <button id="current-lang" type="button">
+        <img id="current-flag" src="/assets/flags/RUS.svg" alt="RU">
+        <span id="current-code">RUS</span> ▾
+      </button>
+      <ul id="lang-menu" class="hidden">
+        <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+        <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+        <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+      </ul>
+    </div>
+    <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+  </div>
 
   <!-- CTA мобильная -->
   <a class="cta-link mobile-cta" href=""
@@ -97,7 +105,7 @@
     <p>Я работаю с собственниками, советами директоров и инвестиционными фондами, помогая запускать трансформацию бизнеса в нестабильных условиях: восстанавливаю прибыльность, оптимизирую расходы и создаю системы управления, готовые к масштабированию.  
     От кризиса к лидерству — раскрываю потенциал компании через дисциплинированное исполнение, восстановление коммерческой эффективности и практичный менеджмент.  
     Бывший CEO (команды до 8 000 человек), один из трёх лучших CEO Украины по версии Forbes. Член советов директоров AmCham и UN Global Compact.</p>
-    <p><a class="link" href="/assets/Evgeny_Shevchenko_CV_web.pdf" target="_blank" rel="noopener">Скачать CV (PDF)</a></p>
+    <p><a class="link blue" href="/assets/Evgeny_Shevchenko_CV_web.pdf" target="_blank" rel="noopener">Скачать CV (PDF)</a></p>
   </div>
 </section>
 
@@ -242,8 +250,8 @@
   <div class="container">
     <h2>Форматы и гонорар</h2>
     <ul class="pricing">
-      <li><strong>Часовая ставка: <span style="font-size: 0.50em; color: #888; font-style: italic;"></span> €180 / час</strong> для консультаций и коротких обсуждений.</li>
-      <li><strong>Дневная ставка: <span style="font-size: 0.50em; color: #888; font-style: italic;"></span> €1 300 / день</strong> для сессий и проектной работы.</li>
+      <li><strong>Часовая ставка: <span style="font-size: 0.50em; color: #1a1f3a; font-style: italic;"></span> €180 / час</strong> для консультаций и коротких обсуждений.</li>
+      <li><strong>Дневная ставка: <span style="font-size: 0.50em; color: #1a1f3a; font-style: italic;"></span> €1 300 / день</strong> для сессий и проектной работы.</li>
       <li><strong>Interim-роль:</strong> выполнение функций CEO/COO на определённый срок - по договоренности.</li>
     </ul>
     <p style="font-size:16px;opacity:.9">
@@ -482,11 +490,11 @@
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <b>Забронировать бесплатный 30-минутный звонок:</b>
-  <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">Zoom or Google Meet</a>
+  <a class="link blue" href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">Zoom or Google Meet</a>
 <!-- Calendly link widget end -->
   <p>
 <b>E-mail:</b>
-<a class="link" href="mailto:evgeny@shevchenko.solutions">evgeny@shevchenko.solutions</a>
+<a class="link blue" href="mailto:evgeny@shevchenko.solutions">evgeny@shevchenko.solutions</a>
 </p>
 <p>
 <b>Мессенджеры:</b>
@@ -494,7 +502,7 @@
                 </p>
   <p>
     <b>Соцсети:</b>
-<a class="link" href="https://www.linkedin.com/in/evgeny-shevchenko-a3646012/">Linked In</a>
+<a class="link blue" href="https://www.linkedin.com/in/evgeny-shevchenko-a3646012/">Linked In</a>
 </p>
 </div>
   
