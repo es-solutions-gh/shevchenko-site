@@ -12,56 +12,65 @@
 <body>
 
 <header class="header">
+  <div class="wrap">
+
+  <!-- Логотип -->
   <div class="logo">
-    <a href="/uk">SHEVCHENKO.SOLUTIONS</a>
+    shevchenko<span class="dot">.</span>solutions
   </div>
-  <nav class="nav-links">
-    <a href="/uk/#about">Про мене</a>
-    <a href="/uk/#expertise">Експертиза</a>
-    <a href="/uk/#cases">Кейси</a>
-    <a href="/uk/#testimonials">Відгуки</a>
-    <a href="/uk/#formats">Формати та гонорар</a>
-    <a href="/uk/#press">Публікації</a>
-    <a href="/uk/#contact">Контакти</a>
+
+  <!-- CTA (десктоп) -->
+  <a class="cta-link desktop-only" href=""
+     onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'}); return false;">
+    БЕЗКОШТОВНИЙ 30' ДЗВІНОК!
+  </a>
+
+  <!-- Навигация -->
+  <nav class="nav">
+    <a href="#about-me">Про мене</a>
+    <a href="#how-i-help">З чим я допомагаю</a>
+    <a href="#case-studies">Кейси</a>
+    <a href="#what-clients-say">Відгуки</a>
+    <a href="#pricing">Формати та гонорар</a>
+    <a href="#press-media">Публікації</a>
+    <a href="#contact">Контакти</a>
   </nav>
-  <a href="/uk/#contact" class="cta">БЕЗКОШТОВНИЙ 30' ДЗВІНОК!</a>
 
- <!-- Язык (десктоп) -->
-      <div class="lang-switch desktop-only">
-        <button id="current-lang-desktop" type="button">
-          <img id="current-flag-desktop" src="/assets/flags/ENG.svg" alt="EN">
-          <span id="current-code-desktop">ENG</span> ▾
-        </button>
-        <ul id="lang-menu-desktop" class="hidden">
-          <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
-          <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
-          <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
-        </ul>
-      </div>
-    </nav>
+  <!-- Язык (десктоп) -->
+  <div class="lang-switch desktop-only">
+    <button id="current-lang-desktop" type="button">
+      <img id="current-flag-desktop" src="/assets/flags/UKR.svg" alt="UK">
+      <span id="current-code-desktop">UKR</span> ▾
+    </button>
+    <ul id="lang-menu-desktop" class="hidden">
+      <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+      <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+      <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+    </ul>
+  </div>
 
-    <!-- Мобильная строка: язык + бургер -->
-    <div class="mobile-header-row">
-      <div class="lang-switch mobile-top">
-        <button id="current-lang" type="button">
-          <img id="current-flag" src="/assets/flags/ENG.svg" alt="EN">
-          <span id="current-code">ENG</span> ▾
-        </button>
-        <ul id="lang-menu" class="hidden">
-          <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
-          <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
-          <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
-        </ul>
-      </div>
-      <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+  <!-- Мобильная строка: язык + бургер -->
+  <div class="mobile-header-row">
+    <div class="lang-switch mobile-top">
+      <button id="current-lang" type="button">
+        <img id="current-flag" src="/assets/flags/UKR.svg" alt="UK">
+        <span id="current-code">UKR</span> ▾
+      </button>
+      <ul id="lang-menu" class="hidden">
+        <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+        <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+        <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+      </ul>
     </div>
+    <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+  </div>
 
-    <!-- мобильная CTA -->
-   <a class="cta-link mobile-cta" href=""
-       onclick="Calendly.initPopupWidget({url:'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
-      <!-- RU/UK текст -->
-      БЕЗКОШТОВНИЙ 30' ДЗВІНОК!
-    </a>
+  <!-- мобильная CTA -->
+  <a class="cta-link mobile-cta" href=""
+     onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'}); return false;">
+    БЕЗКОШТОВНИЙ 30' ДЗВІНОК!
+  </a>
+
   </div>
 </header>
 
@@ -92,7 +101,7 @@
     <p>Я працюю з власниками, радами директорів та інвестиційними фондами, допомагаючи запускати трансформацію бізнесу в нестабільних умовах: відновлюю прибутковість, оптимізую витрати та створюю системи управління, готові до масштабування.<br>
     Від кризи до лідерства — розкриваю потенціал компанії через системне впровадження, відновлення комерційної ефективності та практичний менеджмент.<br>
     Колишній CEO (команди до 8 000 людей), один із трьох найкращих CEO України за версією Forbes. Член рад директорів AmCham і UN Global Compact.</p>
-    <p><a class="link" href="/assets/Evgeny_Shevchenko_CV_web.pdf" target="_blank" rel="noopener">Скачати CV (PDF)</a></p>
+    <p><a class="link blue" href="/assets/Evgeny_Shevchenko_CV_web.pdf" target="_blank" rel="noopener">Скачати CV (PDF)</a></p>
   </div>
 </section>
 
@@ -407,12 +416,12 @@
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <b>Забронювати безкоштовний 30-хвилинний дзвінок:</b>
-<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">Zoom або Google Meet</a>
-<!-- Calendly link widget end --> 
-  <p> <b>E-mail:</b> <a class="link" href="mailto:evgeny@shevchenko.solutions">evgeny@shevchenko.solutions</a> </p> 
-  <p> <b>Месенджери:</b> WhatsApp | Telegram | Signal : +351 933 018 008 </p> 
+<a class="link blue" href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">Zoom або Google Meet</a>
+<!-- Calendly link widget end -->
+  <p> <b>E-mail:</b> <a class="link blue" href="mailto:evgeny@shevchenko.solutions">evgeny@shevchenko.solutions</a> </p>
+  <p> <b>Месенджери:</b> WhatsApp | Telegram | Signal : +351 933 018 008 </p>
   <p> <b>Соцмережі:</b>
-<a class="link" href="https://www.linkedin.com/in/evgeny-shevchenko-a3646012/">Linked In</a>
+<a class="link blue" href="https://www.linkedin.com/in/evgeny-shevchenko-a3646012/">Linked In</a>
 </p>
 </div>
   
