@@ -280,6 +280,50 @@ a {
   margin-bottom: 1rem;
 }
 
+
+/* ===== LEGAL PAGES ===== */
+.section.legal {
+  background-color: #ffffff;
+  color: #1a1f3a;
+}
+
+.section.legal .container {
+  max-width: 800px;
+}
+
+.section.legal h1 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  color: #0b1e59;
+}
+
+.section.legal h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.section.legal h3 {
+  margin-top: 1.5rem;
+  font-size: 1.15rem;
+}
+
+.section.legal p,
+.section.legal li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.section.legal ul {
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+.section.legal a {
+  color: #0b1e59;
+  text-decoration: underline;
+}
+
 /* ===== CARD GRID ===== */
 .cardgrid {
   display: grid;
@@ -299,7 +343,7 @@ a {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  border-color: #f90;
+  border-color: rgb(160, 160, 160);
 }
 
 .card h3 {
@@ -315,7 +359,7 @@ a {
 }
 
 .card i {
-  color: #4a90e2;
+  color: #5d5d5d;
   font-style: italic;
 }
 
@@ -350,7 +394,7 @@ a {
   border-radius: 50%;
   margin: 0 auto 1rem;
   object-fit: cover;
-  border: 3px solid #f90;
+  border: 3px solid rgb(255, 255, 255);
 }
 
 .testimonial blockquote {
@@ -430,7 +474,7 @@ a {
 
 .post:hover {
   transform: translateY(-4px);
-  border-color: #f90;
+  border-color: rgb(160, 160, 160);
 }
 
 .post img {
@@ -464,7 +508,7 @@ a {
 
 .press-card:hover {
   transform: translateY(-4px);
-  border-color: #f90;
+  border-color: rgb(160, 160, 160);
 }
 
 .press-thumb {
@@ -781,4 +825,12 @@ a {
   .cardgrid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+.footer-divider {
+  margin: 0 8px;
+  color: #999;
+}
+.footer a {
+  text-decoration: underline;
+  color: inherit;
 }
