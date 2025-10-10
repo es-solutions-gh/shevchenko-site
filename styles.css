@@ -280,6 +280,50 @@ a {
   margin-bottom: 1rem;
 }
 
+
+/* ===== LEGAL PAGES ===== */
+.section.legal {
+  background-color: #ffffff;
+  color: #1a1f3a;
+}
+
+.section.legal .container {
+  max-width: 800px;
+}
+
+.section.legal h1 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  color: #0b1e59;
+}
+
+.section.legal h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.section.legal h3 {
+  margin-top: 1.5rem;
+  font-size: 1.15rem;
+}
+
+.section.legal p,
+.section.legal li {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+.section.legal ul {
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+.section.legal a {
+  color: #0b1e59;
+  text-decoration: underline;
+}
+
 /* ===== CARD GRID ===== */
 .cardgrid {
   display: grid;
