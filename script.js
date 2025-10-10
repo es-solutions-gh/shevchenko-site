@@ -5,13 +5,31 @@ document.getElementById('burger-btn')?.addEventListener('click', function () {
 });
 
 // Toggle desktop language menu
-document.getElementById('current-lang-desktop')?.addEventListener('click', function () {
+document.getElementById('current-lang-desktop')?.addEventListener('click', function (e) {
+  e.stopPropagation();
   document.getElementById('lang-menu-desktop')?.classList.toggle('hidden');
 });
 
 // Toggle mobile language menu
-document.getElementById('current-lang')?.addEventListener('click', function () {
+document.getElementById('current-lang')?.addEventListener('click', function (e) {
+  e.stopPropagation();
   document.getElementById('lang-menu')?.classList.toggle('hidden');
+});
+
+// Close language menus when clicking outside
+document.addEventListener('click', function (e) {
+  const desktopMenu = document.getElementById('lang-menu-desktop');
+  const mobileMenu = document.getElementById('lang-menu');
+  const desktopBtn = document.getElementById('current-lang-desktop');
+  const mobileBtn = document.getElementById('current-lang');
+
+  if (desktopMenu && !desktopMenu.contains(e.target) && e.target !== desktopBtn) {
+    desktopMenu.classList.add('hidden');
+  }
+
+  if (mobileMenu && !mobileMenu.contains(e.target) && e.target !== mobileBtn) {
+    mobileMenu.classList.add('hidden');
+  }
 });
 
 // Global language switcher — сохраняет текущий путь (главная или case)
@@ -41,6 +59,19 @@ document.querySelectorAll('[data-lang]').forEach(item => {
       newPath += remainingPath;
     }
 
+    // Save current scroll position
+    const scrollY = window.scrollY;
+    sessionStorage.setItem('scrollPosition', scrollY);
+
     window.location.href = newPath;
   });
+});
+
+// Restore scroll position after language switch
+window.addEventListener('load', () => {
+  const savedScroll = sessionStorage.getItem('scrollPosition');
+  if (savedScroll) {
+    window.scrollTo(0, parseInt(savedScroll));
+    sessionStorage.removeItem('scrollPosition');
+  }
 });

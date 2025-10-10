@@ -7,7 +7,7 @@
     <link rel='stylesheet' href='/styles.css'/>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-    <script src="/assets/js/lang-switch.js" defer></script>
+    
     <script src="/script.js" defer></script>
   </head>
 
@@ -17,9 +17,8 @@
         <a href="index.html" class="logo">
           shevchenko<span class='dot'>.</span>solutions
         </a>
-        <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
 
-        <a class='cta-link' href='#' onclick="Calendly.initPopupWidget({url:'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
+        <a class='cta-link desktop-only' href='#' onclick="Calendly.initPopupWidget({url:'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
           ОБГОВОРИТИ СХОЖИЙ КЕЙС?
         </a>
 
@@ -27,12 +26,26 @@
           <a class='nav-link' href='index.html#how-i-help'>Експертиза</a>
           <a class='nav-link' href='index.html#pricing'>Формати та гонорар</a>
           <a class='nav-link' href='index.html#contact'>Контакти</a>
-          <a class='nav-link back-link' href='index.html#case-studies' style="font-weight:bold; margin-left:auto;">Назад до кейсів</a>
+          <a class='nav-link back-link' href='index.html#case-studies'>Назад до кейсів</a>
         </nav>
-      <div class="lang-switch">
+
+      <div class="lang-switch desktop-only">
+        <button id="current-lang-desktop" type="button">
+          <img id="current-flag-desktop" src="/assets/flags/UKR.svg" alt="UK">
+          <span id="current-code-desktop">UKR</span> ▾
+        </button>
+        <ul id="lang-menu-desktop" class="hidden">
+          <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+          <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+          <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+        </ul>
+      </div>
+
+      <div class="mobile-header-row">
+        <div class="lang-switch mobile-top">
           <button id="current-lang" type="button">
-            <img id="current-flag" src="/assets/flags/RUS.svg" alt="RU">
-            <span id="current-code">RUS</span> ▾
+            <img id="current-flag" src="/assets/flags/UKR.svg" alt="UK">
+            <span id="current-code">UKR</span> ▾
           </button>
           <ul id="lang-menu" class="hidden">
             <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
@@ -40,7 +53,8 @@
             <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
           </ul>
         </div>
-      </nav>
+        <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+      </div>
         
       </div>
     </header>

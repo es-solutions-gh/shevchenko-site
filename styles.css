@@ -752,6 +752,20 @@ a {
   #cookie-banner {
     flex-direction: column;
     text-align: center;
+    padding: 1rem 1.5rem;
+    gap: 0.8rem;
+  }
+
+  #cookie-banner p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  #cookie-banner button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 200px;
   }
 }
 
