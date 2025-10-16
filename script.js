@@ -169,8 +169,8 @@ document.querySelectorAll('[data-lang]').forEach(item => {
 
   // Adjust scroll padding per language
   const scrollPadding = {
-    'en': '100px',
-    'ru': '120px',
+    'en': '110px',
+    'ru': '110px',
     'uk': '110px'
   };
 
