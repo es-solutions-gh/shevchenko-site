@@ -187,3 +187,20 @@ window.addEventListener('load', () => {
     sessionStorage.removeItem('scrollPosition');
   }
 });
+const banner = document.getElementById("cookie-banner");
+const modal = document.getElementById("cookie-modal");
+const acceptAllBtn = document.getElementById("cookie-accept-all");
+const managePrefsBtn = document.getElementById("cookie-preferences");
+
+acceptAllBtn.addEventListener("click", () => {
+  localStorage.setItem("cookiePreferences", JSON.stringify({
+    essential: true,
+    analytics: true,
+    marketing: true
+  }));
+  banner.classList.add("hidden");
+});
+
+managePrefsBtn.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+});
