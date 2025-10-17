@@ -575,6 +575,14 @@ a {
   text-align: center;
 }
 
+.pricing-individual {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1a1f3a;
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
 .pricing-card-horizontal .pricing-amount {
   text-align: right;
 }
