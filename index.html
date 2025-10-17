@@ -595,12 +595,90 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
 </footer>
 <script>
             document.getElementById('y').textContent = new Date().getFullYear()
-        </script>
+</script>
+
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner" style="display:none;">
-  <p>We use cookies to improve your browsing experience. By continuing to visit this site you agree to our use of cookies.</p>
-  <button id="accept-cookies">Accept</button>
+<div id="cookie-banner" class="hidden">
+  <div class="cookie-text">
+    <p>🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept.</p>
+    <div class="cookie-buttons">
+      <button id="cookie-preferences">Manage Preferences</button>
+      <button id="cookie-accept-all">Accept All</button>
+    </div>
+  </div>
 </div>
+
+<div id="cookie-modal" class="hidden">
+  <div class="cookie-modal-content">
+    <h3>Manage Cookie Preferences</h3>
+    <form id="cookie-form">
+      <label>
+        <input type="checkbox" checked disabled />
+        <strong>Strictly Necessary Cookies</strong> – Always active
+      </label>
+      <label>
+        <input type="checkbox" id="analytics-cookies" />
+        Performance & Analytics Cookies
+      </label>
+      <label>
+        <input type="checkbox" id="marketing-cookies" />
+        Marketing Cookies
+      </label>
+      <div class="cookie-modal-actions">
+        <button type="submit">Save Preferences</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const banner = document.getElementById("cookie-banner");
+    const modal = document.getElementById("cookie-modal");
+    const acceptAllBtn = document.getElementById("cookie-accept-all");
+    const managePrefsBtn = document.getElementById("cookie-preferences");
+    const form = document.getElementById("cookie-form");
+    const analyticsInput = document.getElementById("analytics-cookies");
+    const marketingInput = document.getElementById("marketing-cookies");
+
+    function savePreferences(prefs) {
+      localStorage.setItem("cookiePreferences", JSON.stringify(prefs));
+    }
+
+    function hasPreferences() {
+      return !!localStorage.getItem("cookiePreferences");
+    }
+
+    if (!hasPreferences()) {
+      banner.classList.remove("hidden");
+    }
+
+    acceptAllBtn.addEventListener("click", () => {
+      savePreferences({
+        essential: true,
+        analytics: true,
+        marketing: true
+      });
+      banner.classList.add("hidden");
+    });
+
+    managePrefsBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      savePreferences({
+        essential: true,
+        analytics: analyticsInput.checked,
+        marketing: marketingInput.checked
+      });
+      modal.classList.add("hidden");
+      banner.classList.add("hidden");
+    });
+  });
+</script>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
