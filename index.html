@@ -598,24 +598,23 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
 </script>
 
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner" class="hidden">
+<div id="cookie-banner" class="">
   <div class="cookie-text">
     <p>
       🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept. 
-      <a href="/cookie-policy.en.html" target="_blank" rel="noopener">View Cookie Policy</a>
+      <a href="/cookie-policy.en.html">Learn more</a>
     </p>
     <div class="cookie-buttons">
-      <button id="cookie-preferences">Manage Preferences</button>
-      <button id="cookie-accept-all">Accept All</button>
+      <button id="accept-all">Accept All</button>
+      <button id="manage-preferences">Manage Preferences</button>
     </div>
   </div>
 </div>
 
 
-
 <div id="cookie-modal" class="hidden">
   <div class="cookie-modal-content">
-    <button id="cookie-close-modal" aria-label="Close" class="cookie-close">&times;</button>
+    <button class="cookie-close" id="cookie-close-modal">&times;</button>
     <h3>Manage Cookie Preferences</h3>
     <form id="cookie-form">
       <label>
@@ -637,62 +636,54 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
   </div>
 </div>
 
-
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById("cookie-banner");
-    const modal = document.getElementById("cookie-modal");
-    const acceptAllBtn = document.getElementById("cookie-accept-all");
-    const managePrefsBtn = document.getElementById("cookie-preferences");
-    const form = document.getElementById("cookie-form");
-    const analyticsInput = document.getElementById("analytics-cookies");
-    const marketingInput = document.getElementById("marketing-cookies");
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("cookie-banner");
+  const modal = document.getElementById("cookie-modal");
+  const acceptAllBtn = document.getElementById("accept-all");
+  const manageBtn = document.getElementById("manage-preferences");
+  const closeModalBtn = document.getElementById("cookie-close-modal");
+  const form = document.getElementById("cookie-form");
+  const analyticsInput = document.getElementById("analytics-cookies");
+  const marketingInput = document.getElementById("marketing-cookies");
 
-    function savePreferences(prefs) {
-      localStorage.setItem("cookiePreferences", JSON.stringify(prefs));
-    }
+  function savePreferences(prefs) {
+    localStorage.setItem("cookie-preferences", JSON.stringify(prefs));
+    console.log("Saved prefs:", prefs);
+  }
 
-    function hasPreferences() {
-      return !!localStorage.getItem("cookiePreferences");
-    }
+  if (!localStorage.getItem("cookie-preferences")) {
+    banner.classList.remove("hidden");
+  }
 
-    if (!hasPreferences()) {
-      banner.classList.remove("hidden");
-    }
-
-    acceptAllBtn.addEventListener("click", () => {
-      savePreferences({
-        essential: true,
-        analytics: true,
-        marketing: true
-      });
-      banner.classList.add("hidden");
+  acceptAllBtn.addEventListener("click", () => {
+    savePreferences({
+      essential: true,
+      analytics: true,
+      marketing: true
     });
-
-    managePrefsBtn.addEventListener("click", () => {
-      modal.classList.remove("hidden");
-    });
-
-    form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  savePreferences({
-    essential: true,
-    analytics: analyticsInput.checked,
-    marketing: marketingInput.checked
+    banner.classList.add("hidden");
   });
-  modal.classList.add("hidden");
-  banner.classList.add("hidden");
-});
 
-// === крестик закрытия модалки ===
-const closeModalBtn = document.getElementById("cookie-close-modal");
-if (closeModalBtn) {
+  manageBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+  });
+
   closeModalBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
   });
-}
 
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    savePreferences({
+      essential: true,
+      analytics: analyticsInput.checked,
+      marketing: marketingInput.checked
+    });
+    modal.classList.add("hidden");
+    banner.classList.add("hidden");
   });
+});
 </script>
 
 
