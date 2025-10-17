@@ -597,26 +597,43 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
             document.getElementById('y').textContent = new Date().getFullYear()
         </script>
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner" style="display:none;">
-  <p>We use cookies to improve your browsing experience. By continuing to visit this site you agree to our use of cookies.</p>
-  <button id="accept-cookies">Accept</button>
+<div id="cookie-banner" class="hidden">
+  <div class="cookie-content-wrapper">
+    <p class="cookie-text-main">
+      🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept.
+      <a href="/cookie-policy.en.html">Cookie Policy</a>.
+    </p>
+    <div class="cookie-buttons">
+      <button id="cookie-accept">Accept All</button>
+      <button id="cookie-manage">Manage Preferences</button>
+    </div>
+  </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById("cookie-banner");
-    const acceptBtn = document.getElementById("accept-cookies");
-
-    if (!localStorage.getItem("cookiesAccepted")) {
-      banner.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookiesAccepted", "true");
-      banner.style.display = "none";
-    });
-  });
-</script>
+<!-- Cookie Preferences Modal -->
+<div id="cookie-modal" class="hidden">
+  <div class="cookie-modal-content">
+    <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
+    <h3>Manage Cookie Preferences</h3>
+    <form id="cookie-form">
+      <label>
+        <input type="checkbox" checked disabled />
+        <strong>Strictly Necessary Cookies</strong> (Always active)
+      </label>
+      <label>
+        <input type="checkbox" id="analytics-cookies" />
+        Performance & Analytics Cookies
+      </label>
+      <label>
+        <input type="checkbox" id="marketing-cookies" />
+        Marketing Cookies
+      </label>
+      <div class="cookie-modal-actions">
+        <button type="submit">Save Preferences</button>
+      </div>
+    </form>
+  </div>
+</div>
 <!-- /Cookie Consent Banner -->
 
 </body>

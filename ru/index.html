@@ -566,27 +566,45 @@
   <a href="/cookie-policy.ru.html">Политика Cookie</a>
 </footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner" style="display:none;">
-  <p>Мы используем файлы cookie для улучшения вашего опыта. Продолжая посещать этот сайт, вы соглашаетесь с их использованием.</p>
-  <button id="accept-cookies">Принять</button>
+<div id="cookie-banner" class="hidden">
+  <div class="cookie-content-wrapper">
+    <p class="cookie-text-main">
+      🍪 Мы используем файлы cookie для улучшения вашего опыта использования этого сайта. Вы можете выбрать, какие типы файлов cookie принимать.
+      <a href="/cookie-policy.ru.html">Политика cookie</a>.
+    </p>
+    <div class="cookie-buttons">
+      <button id="cookie-accept">Принять все</button>
+      <button id="cookie-manage">Управлять настройками</button>
+    </div>
+  </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById("cookie-banner");
-    const acceptBtn = document.getElementById("accept-cookies");
-
-    if (!localStorage.getItem("cookiesAccepted")) {
-      banner.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookiesAccepted", "true");
-      banner.style.display = "none";
-    });
-  });
-</script>
+<!-- Cookie Preferences Modal -->
+<div id="cookie-modal" class="hidden">
+  <div class="cookie-modal-content">
+    <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
+    <h3>Управление настройками cookie</h3>
+    <form id="cookie-form">
+      <label>
+        <input type="checkbox" checked disabled />
+        <strong>Строго необходимые cookie</strong> (Всегда активны)
+      </label>
+      <label>
+        <input type="checkbox" id="analytics-cookies" />
+        Cookie для аналитики и производительности
+      </label>
+      <label>
+        <input type="checkbox" id="marketing-cookies" />
+        Маркетинговые cookie
+      </label>
+      <div class="cookie-modal-actions">
+        <button type="submit">Сохранить настройки</button>
+      </div>
+    </form>
+  </div>
+</div>
 <!-- /Cookie Consent Banner -->
 
 </body>

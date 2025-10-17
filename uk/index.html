@@ -479,27 +479,45 @@
   <a href="/cookie-policy.uk.html">Політика Cookie</a>
 </footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner" style="display:none;">
-  <p>Ми використовуємо файли cookie для покращення вашого досвіду. Продовжуючи відвідувати цей сайт, ви погоджуєтеся з їх використанням.</p>
-  <button id="accept-cookies">Прийняти</button>
+<div id="cookie-banner" class="hidden">
+  <div class="cookie-content-wrapper">
+    <p class="cookie-text-main">
+      🍪 Ми використовуємо файли cookie, щоб покращити ваш досвід на цьому сайті. Ви можете вибрати, які типи файлів cookie приймати.
+      <a href="/cookie-policy.uk.html">Політика щодо файлів cookie</a>.
+    </p>
+    <div class="cookie-buttons">
+      <button id="cookie-accept">Прийняти усі</button>
+      <button id="cookie-manage">Керування налаштуваннями</button>
+    </div>
+  </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById("cookie-banner");
-    const acceptBtn = document.getElementById("accept-cookies");
-
-    if (!localStorage.getItem("cookiesAccepted")) {
-      banner.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookiesAccepted", "true");
-      banner.style.display = "none";
-    });
-  });
-</script>
+<!-- Cookie Preferences Modal -->
+<div id="cookie-modal" class="hidden">
+  <div class="cookie-modal-content">
+    <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
+    <h3>Керування налаштуваннями файлів cookie</h3>
+    <form id="cookie-form">
+      <label>
+        <input type="checkbox" checked disabled />
+        <strong>Суворо необхідні cookie</strong> (завжди активні)
+      </label>
+      <label>
+        <input type="checkbox" id="analytics-cookies" />
+        Cookie для продуктивності та аналітики
+      </label>
+      <label>
+        <input type="checkbox" id="marketing-cookies" />
+        Маркетингові cookie
+      </label>
+      <div class="cookie-modal-actions">
+        <button type="submit">Зберегти налаштування</button>
+      </div>
+    </form>
+  </div>
+</div>
 <!-- /Cookie Consent Banner -->
 
 </body>
