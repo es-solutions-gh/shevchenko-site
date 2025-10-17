@@ -187,20 +187,77 @@ window.addEventListener('load', () => {
     sessionStorage.removeItem('scrollPosition');
   }
 });
-const banner = document.getElementById("cookie-banner");
-const modal = document.getElementById("cookie-modal");
-const acceptAllBtn = document.getElementById("cookie-accept-all");
-const managePrefsBtn = document.getElementById("cookie-preferences");
 
-acceptAllBtn.addEventListener("click", () => {
-  localStorage.setItem("cookiePreferences", JSON.stringify({
-    essential: true,
-    analytics: true,
-    marketing: true
-  }));
-  banner.classList.add("hidden");
-});
+// ===== COOKIE CONSENT FUNCTIONALITY =====
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("cookie-banner");
+  const modal = document.getElementById("cookie-modal");
+  const acceptBtn = document.getElementById("cookie-accept");
+  const manageBtn = document.getElementById("cookie-manage");
+  const closeModalBtn = document.getElementById("cookie-close-modal");
+  const form = document.getElementById("cookie-form");
+  const analyticsInput = document.getElementById("analytics-cookies");
+  const marketingInput = document.getElementById("marketing-cookies");
 
-managePrefsBtn.addEventListener("click", () => {
-  modal.classList.remove("hidden");
+  // Функция сохранения настроек
+  function savePreferences(prefs) {
+    localStorage.setItem("cookie-preferences", JSON.stringify(prefs));
+    console.log("Cookie preferences saved:", prefs);
+  }
+
+  // Проверяем, есть ли уже сохраненные настройки
+  const savedPrefs = localStorage.getItem("cookie-preferences");
+  if (!savedPrefs) {
+    // Показываем баннер только если настроек нет
+    banner.classList.remove("hidden");
+    banner.style.display = "flex";
+  }
+
+  // Кнопка "Accept All"
+  acceptBtn.addEventListener("click", () => {
+    savePreferences({
+      essential: true,
+      analytics: true,
+      marketing: true
+    });
+    banner.classList.add("hidden");
+    banner.style.display = "none";
+  });
+
+  // Кнопка "Manage Preferences"
+  manageBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+    
+    // Загружаем текущие настройки в форму
+    if (savedPrefs) {
+      const prefs = JSON.parse(savedPrefs);
+      analyticsInput.checked = prefs.analytics || false;
+      marketingInput.checked = prefs.marketing || false;
+    }
+  });
+
+  // Закрытие модального окна
+  closeModalBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  // Сохранение выбранных настроек
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    savePreferences({
+      essential: true,
+      analytics: analyticsInput.checked,
+      marketing: marketingInput.checked
+    });
+    modal.classList.add("hidden");
+    banner.classList.add("hidden");
+    banner.style.display = "none";
+  });
+
+  // Закрытие модального окна при клике вне его
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+  });
 });

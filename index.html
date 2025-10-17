@@ -598,9 +598,16 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
 </script>
 
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner">
-  <div class="cookie-text">
-    <p>
+<<!-- ИНСТРУКЦИЯ: 
+1. Найдите в index.html строку: <!-- Cookie Consent Banner -->
+2. Удалите ВСЁ от этой строки до <!-- /Cookie Consent Banner --> (примерно 135 строк)
+3. Вставьте код ниже вместо удалённого блока
+-->
+
+<!-- Cookie Consent Banner -->
+<div id="cookie-banner" class="hidden">
+  <div class="cookie-content-wrapper">
+    <p class="cookie-text-main">
       🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept.
       <a href="/cookie-policy.en.html">Cookie Policy</a>.
     </p>
@@ -611,9 +618,8 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
   </div>
 </div>
 
-
+<!-- Cookie Preferences Modal -->
 <div id="cookie-modal" class="hidden">
-  <div id="cookie-modal" class="hidden">
   <div class="cookie-modal-content">
     <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
     <h3>Manage Cookie Preferences</h3>
@@ -636,95 +642,8 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
     </form>
   </div>
 </div>
-
-    <h3>Manage Cookie Preferences</h3>
-    <form id="cookie-form">
-      <label>
-        <input type="checkbox" checked disabled />
-        <strong>Strictly Necessary Cookies</strong> (Always active)
-      </label>
-      <label>
-        <input type="checkbox" id="analytics-cookies" />
-        Performance & Analytics Cookies
-      </label>
-      <label>
-        <input type="checkbox" id="marketing-cookies" />
-        Marketing Cookies
-      </label>
-      <div class="cookie-modal-actions">
-        <button type="submit">Save Preferences</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const banner = document.getElementById("cookie-banner");
-  const modal = document.getElementById("cookie-modal");
-  const acceptAllBtn = document.getElementById("accept-all");
-  const manageBtn = document.getElementById("manage-preferences");
-  const closeModalBtn = document.getElementById("cookie-close-modal");
-  const form = document.getElementById("cookie-form");
-  const analyticsInput = document.getElementById("analytics-cookies");
-  const marketingInput = document.getElementById("marketing-cookies");
-
-  function savePreferences(prefs) {
-    localStorage.setItem("cookie-preferences", JSON.stringify(prefs));
-    console.log("Saved prefs:", prefs);
-  }
-
-  if (!localStorage.getItem("cookie-preferences")) {
-    banner.classList.remove("hidden");
-  }
-
-  acceptAllBtn.addEventListener("click", () => {
-    savePreferences({
-      essential: true,
-      analytics: true,
-      marketing: true
-    });
-    banner.classList.add("hidden");
-  });
-
-  manageBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden");
-  });
-
-  closeModalBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-  });
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    savePreferences({
-      essential: true,
-      analytics: analyticsInput.checked,
-      marketing: marketingInput.checked
-    });
-    modal.classList.add("hidden");
-    banner.classList.add("hidden");
-  });
-});
-</script>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById("cookie-banner");
-    const acceptBtn = document.getElementById("accept-cookies");
-
-    if (!localStorage.getItem("cookiesAccepted")) {
-      banner.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookiesAccepted", "true");
-      banner.style.display = "none";
-    });
-  });
-</script>
 <!-- /Cookie Consent Banner -->
+
 
 </body>
 </html>
