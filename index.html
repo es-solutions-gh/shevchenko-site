@@ -600,7 +600,12 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
 <!-- Cookie Consent Banner -->
 <div id="cookie-banner" class="hidden">
   <div class="cookie-text">
-    <p>🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept.</p>
+    <div>
+      <p>🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept.</p>
+      <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 0.3rem;">
+        <a href="/cookie-policy.en.html" style="color:#f90; text-decoration:underline;">View Cookie Policy</a>
+      </p>
+    </div>
     <div class="cookie-buttons">
       <button id="cookie-preferences">Manage Preferences</button>
       <button id="cookie-accept-all">Accept All</button>
@@ -608,13 +613,15 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
   </div>
 </div>
 
+
 <div id="cookie-modal" class="hidden">
   <div class="cookie-modal-content">
+    <button id="cookie-close-modal" aria-label="Close" class="cookie-close">&times;</button>
     <h3>Manage Cookie Preferences</h3>
     <form id="cookie-form">
       <label>
         <input type="checkbox" checked disabled />
-        <strong>Strictly Necessary Cookies</strong> – Always active
+        <strong>Strictly Necessary Cookies</strong> (Always active)
       </label>
       <label>
         <input type="checkbox" id="analytics-cookies" />
@@ -630,6 +637,7 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
     </form>
   </div>
 </div>
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -667,15 +675,24 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
     });
 
     form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      savePreferences({
-        essential: true,
-        analytics: analyticsInput.checked,
-        marketing: marketingInput.checked
-      });
-      modal.classList.add("hidden");
-      banner.classList.add("hidden");
-    });
+  e.preventDefault();
+  savePreferences({
+    essential: true,
+    analytics: analyticsInput.checked,
+    marketing: marketingInput.checked
+  });
+  modal.classList.add("hidden");
+  banner.classList.add("hidden");
+});
+
+// === крестик закрытия модалки ===
+const closeModalBtn = document.getElementById("cookie-close-modal");
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+}
+
   });
 </script>
 
