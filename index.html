@@ -598,23 +598,45 @@ All rates are excluding VAT. Invoicing country is Portugal, so the applicable VA
 </script>
 
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner" class="">
+<div id="cookie-banner">
   <div class="cookie-text">
     <p>
-      🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept. 
-      <a href="/cookie-policy.en.html">Learn more</a>
+      🍪 We use cookies to enhance your experience on this site. You can choose which types of cookies to accept.
+      <a href="/cookie-policy.en.html">Cookie Policy</a>.
     </p>
     <div class="cookie-buttons">
-      <button id="accept-all">Accept All</button>
-      <button id="manage-preferences">Manage Preferences</button>
+      <button id="cookie-accept">Accept All</button>
+      <button id="cookie-manage">Manage Preferences</button>
     </div>
   </div>
 </div>
 
 
 <div id="cookie-modal" class="hidden">
+  <div id="cookie-modal" class="hidden">
   <div class="cookie-modal-content">
-    <button class="cookie-close" id="cookie-close-modal">&times;</button>
+    <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
+    <h3>Manage Cookie Preferences</h3>
+    <form id="cookie-form">
+      <label>
+        <input type="checkbox" checked disabled />
+        <strong>Strictly Necessary Cookies</strong> (Always active)
+      </label>
+      <label>
+        <input type="checkbox" id="analytics-cookies" />
+        Performance & Analytics Cookies
+      </label>
+      <label>
+        <input type="checkbox" id="marketing-cookies" />
+        Marketing Cookies
+      </label>
+      <div class="cookie-modal-actions">
+        <button type="submit">Save Preferences</button>
+      </div>
+    </form>
+  </div>
+</div>
+
     <h3>Manage Cookie Preferences</h3>
     <form id="cookie-form">
       <label>
