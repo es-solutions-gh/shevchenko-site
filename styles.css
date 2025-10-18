@@ -657,12 +657,12 @@ a {
   color: #1a1f3a;
 }
 
-/* Press Grid */
+/* Press Grid - добавлен отступ перед Interviews */
 .press-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 3rem; /* ← ИСПРАВЛЕНО: Было 2rem */
 }
 
 .press-card {
@@ -909,6 +909,10 @@ a {
   min-height: 44px;
 }
 
+.cookie-modal-content label span {
+  flex: 1; /* ← ДОБАВЛЕНО: Текст занимает всё место */
+}
+
 .cookie-modal-content label:hover {
   background: #f5f5f5;
   border-radius: 4px;
@@ -1061,8 +1065,8 @@ body.menu-open::before {
     margin-left: auto;
     flex: 0 0 auto;
     display: flex;
-    flex-direction: row-reverse;
-    gap: 0.5rem;
+    flex-direction: row; /* ← ИСПРАВЛЕНО: Было row-reverse */
+    gap: 0.8rem;
   }
 
   .header .wrap .mobile-header-row .lang-switch button {
