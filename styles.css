@@ -16,7 +16,7 @@ body {
   color: white;
   line-height: 1.6;
   padding-top: 60px;
-  font-size: 16px; /* ← ИСПРАВЛЕНО: Добавлен базовый размер шрифта для предотвращения авто-зума на iOS */
+  font-size: 16px;
 }
 
 a {
@@ -36,8 +36,8 @@ a {
 }
 
 .header .wrap {
-  max-width: 100%;
-  margin: 0;
+  max-width: 1400px; /* ← ИСПРАВЛЕНО: Добавлен max-width */
+  margin: 0 auto; /* ← ИСПРАВЛЕНО: Центрирование */
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -51,6 +51,7 @@ a {
   font-size: 1.3rem;
   color: white;
   white-space: nowrap;
+  flex-shrink: 0; /* ← ДОБАВЛЕНО */
 }
 
 .logo .dot {
@@ -62,7 +63,8 @@ a {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  order: 5;
+  order: 3; /* ← ИСПРАВЛЕНО: было 5 */
+  margin: 0 auto; /* ← ДОБАВЛЕНО: Центрирование */
 }
 
 .nav a {
@@ -80,20 +82,19 @@ a {
 .cta-link {
   background-color: #f90;
   color: white;
-  padding: 0.75rem 1.2rem; /* ← ИСПРАВЛЕНО: Увеличен padding */
-  border-radius: 6px; /* ← Увеличен радиус */
+  padding: 0.75rem 1.2rem;
+  border-radius: 6px;
   font-weight: 600;
-  font-size: 0.95rem; /* ← ИСПРАВЛЕНО: Крупнее текст */
+  font-size: 0.95rem;
   white-space: nowrap;
   text-align: center;
   transition: background-color 0.2s ease;
-  display: inline-flex; /* ← ИСПРАВЛЕНО: Для центрирования */
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px; /* ← ИСПРАВЛЕНО: Минимальная высота для touch */
+  min-height: 44px;
   flex-shrink: 0;
-  order: 4;
-  margin-left: auto;
+  order: 2; /* ← ИСПРАВЛЕНО: было 4 */
 }
 
 .cta-link:hover {
@@ -104,7 +105,7 @@ a {
 .lang-switch {
   position: relative;
   flex-shrink: 0;
-  order: 15;
+  order: 4; /* ← ИСПРАВЛЕНО: было 15 */
 }
 
 .lang-switch button {
@@ -118,7 +119,7 @@ a {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
-  min-height: 40px; /* ← ДОБАВЛЕНО: Минимальная высота */
+  min-height: 40px;
 }
 
 .lang-switch button img {
@@ -137,6 +138,7 @@ a {
   list-style: none;
   min-width: 120px;
   overflow: hidden;
+  z-index: 10000; /* ← ДОБАВЛЕНО */
 }
 
 .lang-switch ul li {
@@ -146,7 +148,7 @@ a {
   align-items: center;
   gap: 0.5rem;
   transition: background 0.2s;
-  min-height: 44px; /* ← ДОБАВЛЕНО */
+  min-height: 44px;
 }
 
 .lang-switch ul li:hover {
@@ -175,10 +177,10 @@ a {
   color: white;
   font-size: 1.8rem;
   cursor: pointer;
-  padding: 0.5rem; /* ← ИСПРАВЛЕНО: Увеличен padding */
+  padding: 0.5rem;
   line-height: 1;
-  min-width: 44px; /* ← ИСПРАВЛЕНО: Минимальная ширина */
-  min-height: 44px; /* ← ИСПРАВЛЕНО: Минимальная высота */
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -382,12 +384,12 @@ a {
   display: inline-block;
   background: white;
   color: #000;
-  padding: 0.75rem 1.5rem; /* ← ИСПРАВЛЕНО: Увеличен padding */
+  padding: 0.75rem 1.5rem;
   border-radius: 6px;
   font-weight: 600;
   transition: background 0.2s;
   border: 1px solid #e0e0e0;
-  min-height: 44px; /* ← ДОБАВЛЕНО */
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -725,27 +727,50 @@ a {
 }
 
 /* ===== CASE STUDY GALLERY ===== */
+/* ИСПРАВЛЕНО: Горизонтальная прокрутка для всех размеров */
 .case-gallery {
   display: flex;
   gap: 1rem;
   margin: 2rem 0;
-  justify-content: center;
-  flex-wrap: wrap; /* ← ИСПРАВЛЕНО: Разрешён перенос */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+}
+
+/* Скрываем скроллбар но оставляем функционал */
+.case-gallery::-webkit-scrollbar {
+  height: 8px;
+}
+
+.case-gallery::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.case-gallery::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.case-gallery::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .case-gallery img {
-  flex: 1 1 30%; /* ← ИСПРАВЛЕНО: Гибкая ширина */
-  min-width: 250px; /* ← ДОБАВЛЕНО: Минимальная ширина */
-  height: auto;
+  flex: 0 0 auto;
+  width: 400px;
+  height: 300px;
   border-radius: 8px;
   object-fit: cover;
+  scroll-snap-align: start;
 }
 
 /* ===== FOOTER ===== */
 .footer {
   padding: 2rem;
   text-align: center;
-  color: rgba(255, 255, 255, 0.7); /* ← ИСПРАВЛЕНО: Ярче текст */
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   background-color: #1a1f3a;
@@ -758,7 +783,7 @@ a {
 
 .footer a {
   text-decoration: underline;
-  color: rgba(255, 255, 255, 0.9); /* ← ИСПРАВЛЕНО: Яркая ссылка */
+  color: rgba(255, 255, 255, 0.9);
   transition: color 0.2s;
 }
 
@@ -805,7 +830,7 @@ a {
 .cookie-text-main a {
   color: #f90;
   text-decoration: underline;
-  font-size: 1rem; /* ← ИСПРАВЛЕНО: Тот же размер */
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -826,7 +851,7 @@ a {
   font-size: 0.95rem;
   transition: background 0.2s;
   white-space: nowrap;
-  min-height: 44px; /* ← ДОБАВЛЕНО */
+  min-height: 44px;
 }
 
 .cookie-buttons button:hover {
@@ -878,10 +903,10 @@ a {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 0.75rem 0.5rem; /* ← ИСПРАВЛЕНО: Увеличен padding */
+  padding: 0.75rem 0.5rem;
   cursor: pointer;
   transition: background 0.2s;
-  min-height: 44px; /* ← ДОБАВЛЕНО */
+  min-height: 44px;
 }
 
 .cookie-modal-content label:hover {
@@ -916,7 +941,7 @@ a {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
-  min-height: 44px; /* ← ДОБАВЛЕНО */
+  min-height: 44px;
 }
 
 .cookie-modal-actions button:hover {
@@ -934,8 +959,8 @@ a {
   cursor: pointer;
   transition: color 0.2s;
   line-height: 1;
-  min-width: 32px; /* ← ДОБАВЛЕНО */
-  min-height: 32px; /* ← ДОБАВЛЕНО */
+  min-width: 32px;
+  min-height: 32px;
 }
 
 .cookie-close:hover {
@@ -985,8 +1010,8 @@ body.menu-open::before {
 /* ===== MOBILE ADAPTATIONS (max-width: 768px) ===== */
 @media (max-width: 768px) {
   body {
-    padding-top: 70px; /* ← ИСПРАВЛЕНО: Увеличен для фиксированного header */
-    font-size: 16px; /* Подтверждаем размер */
+    padding-top: 140px; /* ← ИСПРАВЛЕНО: Увеличен для header + CTA */
+    font-size: 16px;
   }
 
   .desktop-only {
@@ -1006,13 +1031,13 @@ body.menu-open::before {
     width: 100%;
     margin-top: 0;
     text-align: center;
-    font-size: 1rem; /* ← ИСПРАВЛЕНО */
-    padding: 0.85rem 1.5rem; /* ← ИСПРАВЛЕНО */
-    min-height: 48px; /* ← ИСПРАВЛЕНО */
+    font-size: 1rem;
+    padding: 0.85rem 1.5rem;
+    min-height: 48px;
   }
 
   .header {
-    position: fixed; /* ← ИСПРАВЛЕНО: Было sticky */
+    position: fixed;
     top: 0;
   }
 
@@ -1022,7 +1047,7 @@ body.menu-open::before {
     align-items: center;
     position: relative;
     gap: 0.3rem;
-    padding: 0.7rem 1rem; /* ← ИСПРАВЛЕНО: Меньше по краям */
+    padding: 0.7rem 1rem;
   }
 
   .header .wrap .logo {
@@ -1041,13 +1066,13 @@ body.menu-open::before {
   }
 
   .header .wrap .mobile-header-row .lang-switch button {
-    padding: 0.5rem 0.8rem; /* ← ИСПРАВЛЕНО */
+    padding: 0.5rem 0.8rem;
     font-size: 0.85rem;
-    min-height: 40px; /* ← ДОБАВЛЕНО */
+    min-height: 40px;
   }
 
   .header .wrap .mobile-header-row .lang-switch button img {
-    width: 20px; /* ← ИСПРАВЛЕНО: Крупнее флаг */
+    width: 20px;
     height: 15px;
   }
 
@@ -1062,16 +1087,16 @@ body.menu-open::before {
   }
 
   /* МОБИЛЬНОЕ МЕНЮ */
+  /* МОБИЛЬНОЕ МЕНЮ */
   .nav {
-    display: none;
+    display: none; /* ← ИСПРАВЛЕНО: Скрыто по умолчанию */
     flex-direction: column;
-    position: fixed; /* ← ИСПРАВЛЕНО */
-    top: 70px; /* ← ИСПРАВЛЕНО: Под header */
-    right: 0;
-    left: auto;
+    position: fixed;
+    top: 140px; /* ← ИСПРАВЛЕНО: Под header + CTA */
+    right: -100%; /* ← ИСПРАВЛЕНО: Скрыто справа */
     width: 280px;
-    max-width: 85vw; /* ← ДОБАВЛЕНО */
-    height: calc(100vh - 70px); /* ← ИСПРАВЛЕНО */
+    max-width: 85vw;
+    height: calc(100vh - 140px);
     background: rgba(11, 30, 89, 0.98);
     backdrop-filter: blur(10px);
     border-left: 1px solid rgba(255, 255, 255, 0.15);
@@ -1081,13 +1106,12 @@ body.menu-open::before {
     z-index: 9999;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
     overflow-y: auto;
-    transform: translateX(100%); /* ← ДОБАВЛЕНО: Скрыто справа */
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .nav.open {
-    display: flex;
-    transform: translateX(0); /* ← ДОБАВЛЕНО: Выезжает */
+    display: flex; /* ← Показываем */
+    right: 0; /* ← ИСПРАВЛЕНО: Выезжает */
   }
 
   .nav a {
@@ -1097,8 +1121,8 @@ body.menu-open::before {
     text-align: left;
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
-    font-size: 1rem; /* ← ИСПРАВЛЕНО */
-    min-height: 44px; /* ← ДОБАВЛЕНО */
+    font-size: 1rem;
+    min-height: 44px;
     display: flex;
     align-items: center;
   }
@@ -1174,17 +1198,15 @@ body.menu-open::before {
     padding: 1.25rem;
   }
 
-  /* CASE GALLERY */
+  /* CASE GALLERY - Мобильная версия */
   .case-gallery {
-    flex-direction: column; /* ← ИСПРАВЛЕНО: Вертикально */
-    gap: 1rem;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 
   .case-gallery img {
-    width: 100%;
-    max-width: 100%;
-    flex: none;
-    min-width: auto;
+    width: 85vw; /* ← ИСПРАВЛЕНО: 85% ширины экрана */
+    height: 240px;
   }
 
   /* POSTS & PRESS */
@@ -1215,8 +1237,8 @@ body.menu-open::before {
 
   .pricing-card-horizontal {
     flex-direction: column;
-    align-items: flex-start; /* ← ИСПРАВЛЕНО */
-    gap: 1.5rem; /* ← ИСПРАВЛЕНО */
+    align-items: flex-start;
+    gap: 1.5rem;
     padding: 1.5rem 1.25rem;
   }
 
@@ -1266,26 +1288,26 @@ body.menu-open::before {
   }
 
   .cookie-text-main a {
-    font-size: 0.9rem; /* ← ИСПРАВЛЕНО */
+    font-size: 0.9rem;
     font-weight: 600;
   }
 
   .cookie-buttons {
     width: 100%;
-    flex-direction: column; /* ← ИСПРАВЛЕНО: Вертикально */
+    flex-direction: column;
     gap: 0.5rem;
   }
 
   .cookie-buttons button {
-    width: 100%; /* ← ИСПРАВЛЕНО: На всю ширину */
+    width: 100%;
     padding: 0.75rem 1rem;
     font-size: 0.95rem;
-    min-height: 48px; /* ← ИСПРАВЛЕНО */
+    min-height: 48px;
   }
 
   /* COOKIE MODAL */
   .cookie-modal-content {
-    width: 94%; /* ← ИСПРАВЛЕНО */
+    width: 94%;
     max-width: 400px;
     padding: 1.5rem 1.25rem;
   }
@@ -1302,7 +1324,7 @@ body.menu-open::before {
   }
 
   .cookie-modal-actions button {
-    width: 100%; /* ← ДОБАВЛЕНО */
+    width: 100%;
     font-size: 0.95rem;
     padding: 0.75rem 1.5rem;
     min-height: 48px;
@@ -1339,13 +1361,15 @@ body.menu-open::before {
   .nav {
     width: 100%; /* ← Полноэкранное меню */
     max-width: 100%;
-    left: 0;
-    right: 0;
     border-radius: 0;
   }
 
   .section h2 {
     font-size: 1.5rem;
+  }
+
+  .case-gallery img {
+    width: 90vw; /* ← Еще шире на маленьких экранах */
   }
 }
 
@@ -1374,6 +1398,12 @@ body.menu-open::before {
   .pricing-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /* Галерея на планшетах */
+  .case-gallery img {
+    width: 350px;
+    height: 260px;
+  }
 }
 
 /* ===== LARGE DESKTOP (1400px+) ===== */
@@ -1383,7 +1413,7 @@ body.menu-open::before {
   }
 
   .header .wrap {
-    max-width: 1320px;
+    max-width: 1400px;
     margin: 0 auto;
   }
 }
