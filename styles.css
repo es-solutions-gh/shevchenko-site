@@ -657,12 +657,23 @@ a {
   color: #1a1f3a;
 }
 
-/* Press Grid - добавлен отступ перед Interviews */
+/* Press / Media Section */
+.section#press-media h3 {
+  margin-top: 0; /* Первый h3 без отступа */
+}
+
+.section#press-media h3:not(:first-of-type) {
+  margin-top: 4rem; /* ← ДОБАВЛЕНО: Большой отступ перед Interviews */
+  padding-top: 2rem; /* ← ДОБАВЛЕНО: Дополнительный padding */
+  border-top: 1px solid #e0e0e0; /* ← ДОБАВЛЕНО: Визуальный разделитель */
+}
+
+/* Press Grid */
 .press-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 3rem; /* ← ИСПРАВЛЕНО: Было 2rem */
+  margin-top: 2rem; /* ← Вернули обратно */
 }
 
 .press-card {
@@ -887,6 +898,10 @@ a {
   font-size: 1rem;
 }
 
+.cookie-modal-content * {
+  color: #1a1f3a; /* ← ДОБАВЛЕНО: Принудительно чёрный текст */
+}
+
 .cookie-modal-content h3 {
   margin: 0 0 1.5rem;
   color: #1a1f3a;
@@ -900,17 +915,24 @@ a {
 }
 
 .cookie-modal-content label {
-  display: flex;
+  display: grid; /* ← ИСПРАВЛЕНО: Было flex */
+  grid-template-columns: auto 1fr; /* ← ДОБАВЛЕНО: Checkbox + текст */
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem; /* ← Увеличен gap */
   padding: 0.75rem 0.5rem;
   cursor: pointer;
   transition: background 0.2s;
   min-height: 44px;
 }
 
-.cookie-modal-content label span {
-  flex: 1; /* ← ДОБАВЛЕНО: Текст занимает всё место */
+.cookie-modal-content label input[type="checkbox"] {
+  grid-column: 1;
+}
+
+.cookie-modal-content label span,
+.cookie-modal-content label strong {
+  grid-column: 2;
+  text-align: left;
 }
 
 .cookie-modal-content label:hover {
