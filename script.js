@@ -230,6 +230,8 @@ window.addEventListener('load', () => {
   }
 });
 
+let hideCookieModalFn;
+
 // ===== COOKIE CONSENT FUNCTIONALITY =====
 document.addEventListener("DOMContentLoaded", () => {
   const banner = document.getElementById("cookie-banner");
@@ -241,19 +243,94 @@ document.addEventListener("DOMContentLoaded", () => {
   const analyticsInput = document.getElementById("analytics-cookies");
   const marketingInput = document.getElementById("marketing-cookies");
 
-  if (!banner) return; // Exit if cookie banner doesn't exist
+  if (!banner || !modal || !form) return; // Exit if cookie elements don't exist
 
-  // Save preferences
-  function savePreferences(prefs) {
-    localStorage.setItem("cookie-preferences", JSON.stringify(prefs));
-    console.log("Cookie preferences saved:", prefs);
-  }
+  const COOKIE_PREF_KEY = "cookie-preferences";
+  let lastFocusedElement = null;
 
-  // Check if preferences exist
-  const savedPrefs = localStorage.getItem("cookie-preferences");
-  if (!savedPrefs) {
+  const readPreferences = () => {
+    try {
+      const stored = localStorage.getItem(COOKIE_PREF_KEY);
+      if (!stored) return null;
+      return JSON.parse(stored);
+    } catch (error) {
+      console.warn("Unable to read stored cookie preferences", error);
+      localStorage.removeItem(COOKIE_PREF_KEY);
+      return null;
+    }
+  };
+
+  let currentPrefs = readPreferences();
+
+  const syncFormState = (prefs) => {
+    if (analyticsInput) analyticsInput.checked = !!(prefs?.analytics);
+    if (marketingInput) marketingInput.checked = !!(prefs?.marketing);
+  };
+
+  const toggleBodyScroll = (shouldLock) => {
+    document.body.classList.toggle("cookie-modal-open", shouldLock);
+  };
+
+  const showBanner = () => {
     banner.classList.remove("hidden");
     banner.style.display = "flex";
+  };
+
+  const hideBanner = () => {
+    banner.classList.add("hidden");
+    banner.style.display = "none";
+  };
+
+  const focusElement = (element) => {
+    if (!element || !(element instanceof HTMLElement) || !element.isConnected) {
+      return;
+    }
+
+    try {
+      element.focus({ preventScroll: true });
+    } catch (error) {
+      element.focus();
+    }
+  };
+
+  const showModal = () => {
+    lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    currentPrefs = readPreferences() || currentPrefs;
+    syncFormState(currentPrefs);
+    modal.classList.add("is-visible");
+    modal.setAttribute("aria-hidden", "false");
+    toggleBodyScroll(true);
+    focusElement(closeModalBtn);
+  };
+
+  const hideModal = () => {
+    if (!modal.classList.contains("is-visible")) {
+      return;
+    }
+
+    modal.classList.remove("is-visible");
+    modal.setAttribute("aria-hidden", "true");
+    toggleBodyScroll(false);
+    focusElement(lastFocusedElement);
+    lastFocusedElement = null;
+  };
+
+  hideCookieModalFn = hideModal;
+
+  const savePreferences = (prefs) => {
+    try {
+      localStorage.setItem(COOKIE_PREF_KEY, JSON.stringify(prefs));
+      currentPrefs = prefs;
+      console.log("Cookie preferences saved:", prefs);
+    } catch (error) {
+      console.error("Failed to persist cookie preferences", error);
+    }
+  };
+
+  if (!currentPrefs) {
+    showBanner();
+  } else {
+    syncFormState(currentPrefs);
   }
 
   // Accept all cookies
@@ -263,44 +340,36 @@ document.addEventListener("DOMContentLoaded", () => {
       analytics: true,
       marketing: true
     });
-    banner.classList.add("hidden");
-    banner.style.display = "none";
+    hideBanner();
+    hideModal();
   });
 
   // Open preferences modal
   manageBtn?.addEventListener("click", () => {
-    modal?.classList.remove("hidden");
-    
-    // Load current preferences
-    if (savedPrefs) {
-      const prefs = JSON.parse(savedPrefs);
-      if (analyticsInput) analyticsInput.checked = prefs.analytics || false;
-      if (marketingInput) marketingInput.checked = prefs.marketing || false;
-    }
+    showModal();
   });
 
   // Close modal
   closeModalBtn?.addEventListener("click", () => {
-    modal?.classList.add("hidden");
+    hideModal();
   });
 
   // Save selected preferences
-  form?.addEventListener("submit", (e) => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
     savePreferences({
       essential: true,
-      analytics: analyticsInput?.checked || false,
-      marketing: marketingInput?.checked || false
+      analytics: !!analyticsInput?.checked,
+      marketing: !!marketingInput?.checked
     });
-    modal?.classList.add("hidden");
-    banner.classList.add("hidden");
-    banner.style.display = "none";
+    hideModal();
+    hideBanner();
   });
 
   // Close modal on overlay click
-  modal?.addEventListener("click", (e) => {
+  modal.addEventListener("click", (e) => {
     if (e.target === modal) {
-      modal.classList.add("hidden");
+      hideModal();
     }
   });
 });
@@ -412,8 +481,14 @@ document.addEventListener('keydown', (e) => {
     
     // Close cookie modal
     const cookieModal = document.getElementById('cookie-modal');
-    if (cookieModal && !cookieModal.classList.contains('hidden')) {
-      cookieModal.classList.add('hidden');
+    if (cookieModal && cookieModal.classList.contains('is-visible')) {
+      if (typeof hideCookieModalFn === 'function') {
+        hideCookieModalFn();
+      } else {
+        cookieModal.classList.remove('is-visible');
+        cookieModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('cookie-modal-open');
+      }
     }
   }
 });
