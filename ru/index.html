@@ -576,29 +576,29 @@
       <a href="/cookie-policy.ru.html">Политика cookie</a>.
     </p>
     <div class="cookie-buttons">
-      <button id="cookie-accept">Принять все</button>
-      <button id="cookie-manage">Управлять настройками</button>
+      <button id="cookie-accept" type="button">Принять все</button>
+      <button id="cookie-manage" type="button">Управлять настройками</button>
     </div>
   </div>
 </div>
 
 <!-- Cookie Preferences Modal -->
-<div id="cookie-modal" class="hidden">
+<div id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title" aria-hidden="true">
   <div class="cookie-modal-content">
-    <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
-    <h3>Управление настройками cookie</h3>
+    <button id="cookie-close-modal" class="cookie-close" type="button" aria-label="Close">&times;</button>
+    <h3 id="cookie-modal-title">Управление настройками cookie</h3>
     <form id="cookie-form">
       <label>
         <input type="checkbox" checked disabled />
-        <strong>Строго необходимые cookie</strong> (Всегда активны)
+        <span><strong>Строго необходимые cookie</strong> (Всегда активны)</span>
       </label>
       <label>
         <input type="checkbox" id="analytics-cookies" />
-        Cookie для аналитики и производительности
+        <span>Cookie для аналитики и производительности</span>
       </label>
       <label>
         <input type="checkbox" id="marketing-cookies" />
-        Маркетинговые cookie
+        <span>Маркетинговые cookie</span>
       </label>
       <div class="cookie-modal-actions">
         <button type="submit">Сохранить настройки</button>

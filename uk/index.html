@@ -489,29 +489,29 @@
       <a href="/cookie-policy.uk.html">Політика щодо cookie</a>.
     </p>
     <div class="cookie-buttons">
-      <button id="cookie-accept">Прийняти усі</button>
-      <button id="cookie-manage">Керування налаштуваннями</button>
+      <button id="cookie-accept" type="button">Прийняти усі</button>
+      <button id="cookie-manage" type="button">Керування налаштуваннями</button>
     </div>
   </div>
 </div>
 
 <!-- Cookie Preferences Modal -->
-<div id="cookie-modal" class="hidden">
+<div id="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title" aria-hidden="true">
   <div class="cookie-modal-content">
-    <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
-    <h3>Керування налаштуваннями файлів cookie</h3>
+    <button id="cookie-close-modal" class="cookie-close" type="button" aria-label="Close">&times;</button>
+    <h3 id="cookie-modal-title">Керування налаштуваннями файлів cookie</h3>
     <form id="cookie-form">
       <label>
         <input type="checkbox" checked disabled />
-        <strong>Суворо необхідні cookie</strong> (завжди активні)
+        <span><strong>Суворо необхідні cookie</strong> (завжди активні)</span>
       </label>
       <label>
         <input type="checkbox" id="analytics-cookies" />
-        Cookie для продуктивності та аналітики
+        <span>Cookie для продуктивності та аналітики</span>
       </label>
       <label>
         <input type="checkbox" id="marketing-cookies" />
-        Маркетингові cookie
+        <span>Маркетингові cookie</span>
       </label>
       <div class="cookie-modal-actions">
         <button type="submit">Зберегти налаштування</button>
