@@ -1,46 +1,88 @@
-// Toggle mobile nav menu
-document.getElementById('burger-btn')?.addEventListener('click', function () {
-  const nav = document.querySelector('.nav');
+// ===== MOBILE MENU TOGGLE =====
+const burgerBtn = document.getElementById('burger-btn');
+const nav = document.querySelector('.nav');
+const body = document.body;
+
+// Toggle mobile menu
+burgerBtn?.addEventListener('click', function (e) {
+  e.stopPropagation();
   nav?.classList.toggle('open');
+  body.classList.toggle('menu-open');
+  
+  // Блокировка скролла при открытом меню
+  if (nav?.classList.contains('open')) {
+    body.style.overflow = 'hidden';
+  } else {
+    body.style.overflow = '';
+  }
 });
 
-// Toggle desktop language menu
-document.getElementById('current-lang-desktop')?.addEventListener('click', function (e) {
-  e.stopPropagation();
-  document.getElementById('lang-menu-desktop')?.classList.toggle('hidden');
+// Закрытие меню при клике вне его
+document.addEventListener('click', function (e) {
+  if (nav?.classList.contains('open') && 
+      !nav.contains(e.target) && 
+      !burgerBtn.contains(e.target)) {
+    nav.classList.remove('open');
+    body.classList.remove('menu-open');
+    body.style.overflow = '';
+  }
 });
 
-// Toggle mobile language menu
-document.getElementById('current-lang')?.addEventListener('click', function (e) {
+// Закрытие меню при клике на ссылку
+nav?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      nav.classList.remove('open');
+      body.classList.remove('menu-open');
+      body.style.overflow = '';
+    }
+  });
+});
+
+// ===== LANGUAGE SWITCHER =====
+
+// Desktop language menu toggle
+const desktopLangBtn = document.getElementById('current-lang-desktop');
+const desktopLangMenu = document.getElementById('lang-menu-desktop');
+
+desktopLangBtn?.addEventListener('click', function (e) {
   e.stopPropagation();
-  document.getElementById('lang-menu')?.classList.toggle('hidden');
+  desktopLangMenu?.classList.toggle('hidden');
+});
+
+// Mobile language menu toggle
+const mobileLangBtn = document.getElementById('current-lang');
+const mobileLangMenu = document.getElementById('lang-menu');
+
+mobileLangBtn?.addEventListener('click', function (e) {
+  e.stopPropagation();
+  mobileLangMenu?.classList.toggle('hidden');
 });
 
 // Close language menus when clicking outside
 document.addEventListener('click', function (e) {
-  const desktopMenu = document.getElementById('lang-menu-desktop');
-  const mobileMenu = document.getElementById('lang-menu');
-  const desktopBtn = document.getElementById('current-lang-desktop');
-  const mobileBtn = document.getElementById('current-lang');
-
-  if (desktopMenu && !desktopMenu.contains(e.target) && e.target !== desktopBtn) {
-    desktopMenu.classList.add('hidden');
+  if (desktopLangMenu && 
+      !desktopLangMenu.contains(e.target) && 
+      e.target !== desktopLangBtn) {
+    desktopLangMenu.classList.add('hidden');
   }
 
-  if (mobileMenu && !mobileMenu.contains(e.target) && e.target !== mobileBtn) {
-    mobileMenu.classList.add('hidden');
+  if (mobileLangMenu && 
+      !mobileLangMenu.contains(e.target) && 
+      e.target !== mobileLangBtn) {
+    mobileLangMenu.classList.add('hidden');
   }
 });
 
-// Global language switcher — сохраняет текущий путь (главная или case)
+// ===== LANGUAGE SWITCHING LOGIC =====
 document.querySelectorAll('[data-lang]').forEach(item => {
   item.addEventListener('click', () => {
-    const selectedLang = item.getAttribute('data-lang'); // 'en', 'ru', 'uk'
+    const selectedLang = item.getAttribute('data-lang');
 
     // Save selected language to localStorage
     localStorage.setItem('preferredLanguage', selectedLang);
 
-    // Если это cookie policy, меняем только язык в имени файла
+    // Cookie policy pages
     const isCookiePolicy = window.location.pathname.includes('cookie-policy');
     if (isCookiePolicy) {
       window.location.href = `/cookie-policy.${selectedLang}.html`;
@@ -54,23 +96,18 @@ document.querySelectorAll('[data-lang]').forEach(item => {
       currentLang = pathParts[0];
     }
 
-    // Удаляем язык из пути
     const remainingPath = currentLang ? pathParts.slice(1).join('/') : pathParts.join('/');
     const isHome = remainingPath === '' || remainingPath === 'index.html';
-
-    // Если это кейс, сохраняем имя файла
     const isCasePage = remainingPath.startsWith('case') && remainingPath.endsWith('.html');
 
     let newPath = `/${selectedLang}/`;
     if (isCasePage) {
-      // Для кейсов переходим на тот же файл в другой языковой папке
       newPath += remainingPath;
     } else if (!isHome) {
-      // Для других страниц (если будут)
       newPath += remainingPath;
     }
 
-    // Save current scroll position
+    // Save scroll position
     const scrollY = window.scrollY;
     sessionStorage.setItem('scrollPosition', scrollY);
 
@@ -78,17 +115,16 @@ document.querySelectorAll('[data-lang]').forEach(item => {
   });
 });
 
-// Apply saved language preference on page load
+// ===== APPLY SAVED LANGUAGE PREFERENCE ON PAGE LOAD =====
 (function() {
   const preferredLang = localStorage.getItem('preferredLanguage');
   if (!preferredLang) return;
 
   const pathParts = window.location.pathname.split('/').filter(Boolean);
 
-  // Check if we're on a cookie policy page
+  // Cookie policy pages
   const isCookiePolicy = window.location.pathname.includes('cookie-policy');
   if (isCookiePolicy) {
-    // Extract current language from cookie-policy.XX.html
     const match = window.location.pathname.match(/cookie-policy\.([a-z]{2})\.html/);
     const currentLang = match ? match[1] : 'en';
 
@@ -97,17 +133,15 @@ document.querySelectorAll('[data-lang]').forEach(item => {
       return;
     }
   } else {
-    // Check current language for main pages
+    // Main pages
     let currentLang = null;
     if (['en', 'ru', 'uk'].includes(pathParts[0])) {
       currentLang = pathParts[0];
     } else {
-      // Root index.html defaults to 'en'
       currentLang = 'en';
     }
 
     if (currentLang !== preferredLang) {
-      // Build new path with preferred language
       const remainingPath = currentLang && pathParts[0] === currentLang ? pathParts.slice(1).join('/') : pathParts.join('/');
       const isHome = remainingPath === '' || remainingPath === 'index.html';
       const isCasePage = remainingPath.startsWith('case') && remainingPath.endsWith('.html');
@@ -125,19 +159,19 @@ document.querySelectorAll('[data-lang]').forEach(item => {
   }
 })();
 
-// Update language indicator based on current page
+// ===== UPDATE LANGUAGE INDICATOR =====
 (function() {
   const pathname = window.location.pathname;
-  let currentLang = 'en'; // default
+  let currentLang = 'en';
 
-  // Detect language from cookie-policy filename
+  // Detect from cookie-policy filename
   if (pathname.includes('cookie-policy')) {
     const match = pathname.match(/cookie-policy\.([a-z]{2})\.html/);
     if (match) {
       currentLang = match[1];
     }
   }
-  // Detect language from folder structure (en/, ru/, uk/)
+  // Detect from folder structure
   else {
     const pathParts = pathname.split('/').filter(Boolean);
     if (['en', 'ru', 'uk'].includes(pathParts[0])) {
@@ -145,7 +179,6 @@ document.querySelectorAll('[data-lang]').forEach(item => {
     }
   }
 
-  // Language code to flag and display name mapping
   const langConfig = {
     'en': { flag: 'ENG.svg', code: 'ENG' },
     'ru': { flag: 'RUS.svg', code: 'RUS' },
@@ -154,32 +187,41 @@ document.querySelectorAll('[data-lang]').forEach(item => {
 
   const config = langConfig[currentLang];
   if (config) {
-    // Update desktop button
+    // Desktop
     const desktopFlag = document.getElementById('current-flag-desktop');
     const desktopCode = document.getElementById('current-code-desktop');
     if (desktopFlag) desktopFlag.src = `/assets/flags/${config.flag}`;
     if (desktopCode) desktopCode.textContent = config.code;
 
-    // Update mobile button
+    // Mobile
     const mobileFlag = document.getElementById('current-flag');
     const mobileCode = document.getElementById('current-code');
     if (mobileFlag) mobileFlag.src = `/assets/flags/${config.flag}`;
     if (mobileCode) mobileCode.textContent = config.code;
   }
-
-  // Adjust scroll padding per language
-  const scrollPadding = {
-    'en': '110px',
-    'ru': '110px',
-    'uk': '110px'
-  };
-
-  if (scrollPadding[currentLang]) {
-    document.documentElement.style.scrollPaddingTop = scrollPadding[currentLang];
-  }
 })();
 
-// Restore scroll position after language switch
+// ===== DYNAMIC SCROLL PADDING =====
+// УЛУЧШЕНО: Динамический расчет на основе высоты header
+function updateScrollPadding() {
+  const header = document.querySelector('.header');
+  if (header) {
+    const headerHeight = header.offsetHeight;
+    document.documentElement.style.scrollPaddingTop = `${headerHeight + 20}px`;
+  }
+}
+
+// Обновляем при загрузке
+window.addEventListener('load', updateScrollPadding);
+
+// Обновляем при изменении размера окна (с debounce)
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(updateScrollPadding, 250);
+});
+
+// ===== RESTORE SCROLL POSITION AFTER LANGUAGE SWITCH =====
 window.addEventListener('load', () => {
   const savedScroll = sessionStorage.getItem('scrollPosition');
   if (savedScroll) {
@@ -199,22 +241,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const analyticsInput = document.getElementById("analytics-cookies");
   const marketingInput = document.getElementById("marketing-cookies");
 
-  // Функция сохранения настроек
+  if (!banner) return; // Exit if cookie banner doesn't exist
+
+  // Save preferences
   function savePreferences(prefs) {
     localStorage.setItem("cookie-preferences", JSON.stringify(prefs));
     console.log("Cookie preferences saved:", prefs);
   }
 
-  // Проверяем, есть ли уже сохраненные настройки
+  // Check if preferences exist
   const savedPrefs = localStorage.getItem("cookie-preferences");
   if (!savedPrefs) {
-    // Показываем баннер только если настроек нет
     banner.classList.remove("hidden");
     banner.style.display = "flex";
   }
 
-  // Кнопка "Accept All"
-  acceptBtn.addEventListener("click", () => {
+  // Accept all cookies
+  acceptBtn?.addEventListener("click", () => {
     savePreferences({
       essential: true,
       analytics: true,
@@ -224,40 +267,181 @@ document.addEventListener("DOMContentLoaded", () => {
     banner.style.display = "none";
   });
 
-  // Кнопка "Manage Preferences"
-  manageBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden");
+  // Open preferences modal
+  manageBtn?.addEventListener("click", () => {
+    modal?.classList.remove("hidden");
     
-    // Загружаем текущие настройки в форму
+    // Load current preferences
     if (savedPrefs) {
       const prefs = JSON.parse(savedPrefs);
-      analyticsInput.checked = prefs.analytics || false;
-      marketingInput.checked = prefs.marketing || false;
+      if (analyticsInput) analyticsInput.checked = prefs.analytics || false;
+      if (marketingInput) marketingInput.checked = prefs.marketing || false;
     }
   });
 
-  // Закрытие модального окна
-  closeModalBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
+  // Close modal
+  closeModalBtn?.addEventListener("click", () => {
+    modal?.classList.add("hidden");
   });
 
-  // Сохранение выбранных настроек
-  form.addEventListener("submit", (e) => {
+  // Save selected preferences
+  form?.addEventListener("submit", (e) => {
     e.preventDefault();
     savePreferences({
       essential: true,
-      analytics: analyticsInput.checked,
-      marketing: marketingInput.checked
+      analytics: analyticsInput?.checked || false,
+      marketing: marketingInput?.checked || false
     });
-    modal.classList.add("hidden");
+    modal?.classList.add("hidden");
     banner.classList.add("hidden");
     banner.style.display = "none";
   });
 
-  // Закрытие модального окна при клике вне его
-  modal.addEventListener("click", (e) => {
+  // Close modal on overlay click
+  modal?.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.classList.add("hidden");
     }
   });
 });
+
+// ===== LAZY LOADING IMAGES =====
+// НОВОЕ: Автоматическое lazy loading для всех изображений
+document.addEventListener('DOMContentLoaded', () => {
+  const images = document.querySelectorAll('img:not([loading])');
+  images.forEach(img => {
+    img.setAttribute('loading', 'lazy');
+  });
+});
+
+// ===== PERFORMANCE: DEFER EXTERNAL SCRIPTS =====
+// НОВОЕ: Ленивая загрузка Calendly при первом клике
+let calendlyLoaded = false;
+
+function loadCalendly(callback) {
+  if (calendlyLoaded) {
+    callback();
+    return;
+  }
+
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://assets.calendly.com/assets/external/widget.css';
+  document.head.appendChild(link);
+
+  const script = document.createElement('script');
+  script.src = 'https://assets.calendly.com/assets/external/widget.js';
+  script.async = true;
+  script.onload = () => {
+    calendlyLoaded = true;
+    callback();
+  };
+  document.head.appendChild(script);
+}
+
+// Перехватываем клики на CTA кнопки
+document.addEventListener('DOMContentLoaded', () => {
+  const ctaLinks = document.querySelectorAll('[onclick*="Calendly"]');
+  
+  ctaLinks.forEach(link => {
+    // Удаляем inline onclick
+    const originalOnclick = link.getAttribute('onclick');
+    link.removeAttribute('onclick');
+    
+    // Добавляем event listener
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      loadCalendly(() => {
+        if (window.Calendly) {
+          Calendly.initPopupWidget({
+            url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'
+          });
+        }
+      });
+    });
+  });
+});
+
+// ===== SMOOTH SCROLL POLYFILL FOR OLDER BROWSERS =====
+// НОВОЕ: Плавная прокрутка для всех якорных ссылок
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    
+    // Игнорируем пустые якоря
+    if (href === '#' || href === '#!') return;
+    
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      
+      const header = document.querySelector('.header');
+      const headerHeight = header ? header.offsetHeight : 70;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Закрываем мобильное меню если открыто
+      if (nav?.classList.contains('open')) {
+        nav.classList.remove('open');
+        body.classList.remove('menu-open');
+        body.style.overflow = '';
+      }
+    }
+  });
+});
+
+// ===== ESCAPE KEY TO CLOSE MODALS =====
+// НОВОЕ: Закрытие модалок по ESC
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' || e.key === 'Esc') {
+    // Close mobile menu
+    if (nav?.classList.contains('open')) {
+      nav.classList.remove('open');
+      body.classList.remove('menu-open');
+      body.style.overflow = '';
+    }
+    
+    // Close language menus
+    desktopLangMenu?.classList.add('hidden');
+    mobileLangMenu?.classList.add('hidden');
+    
+    // Close cookie modal
+    const cookieModal = document.getElementById('cookie-modal');
+    if (cookieModal && !cookieModal.classList.contains('hidden')) {
+      cookieModal.classList.add('hidden');
+    }
+  }
+});
+
+// ===== TOUCH FRIENDLY: PREVENT DOUBLE-TAP ZOOM ON BUTTONS =====
+// НОВОЕ: Отключаем двойной тап для зума на кнопках (iOS)
+document.addEventListener('DOMContentLoaded', () => {
+  const touchElements = document.querySelectorAll('button, .cta-link, .linkbtn, .burger');
+  
+  touchElements.forEach(element => {
+    element.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      element.click();
+    }, { passive: false });
+  });
+});
+
+// ===== VIEWPORT HEIGHT FIX FOR MOBILE BROWSERS =====
+// НОВОЕ: Исправляем 100vh на мобильных (учитываем адресную строку)
+function setVhProperty() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVhProperty();
+window.addEventListener('resize', setVhProperty);
+
+// ===== CONSOLE INFO =====
+console.log('🚀 Mobile optimized scripts loaded successfully');
+console.log('📱 Viewport:', window.innerWidth, 'x', window.innerHeight);
+console.log('🌐 Language:', localStorage.getItem('preferredLanguage') || 'en');
