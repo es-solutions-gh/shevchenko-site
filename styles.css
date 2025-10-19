@@ -5,6 +5,21 @@
   box-sizing: border-box;
 }
 
+/* ===== SAFE AREA INSETS (iPhone X+) ===== */
+:root {
+  --safe-area-inset-left: env(safe-area-inset-left);
+  --safe-area-inset-right: env(safe-area-inset-right);
+  --safe-area-inset-top: env(safe-area-inset-top);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom);
+}
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, var(--safe-area-inset-left));
+    padding-right: max(0px, var(--safe-area-inset-right));
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 120px;
@@ -36,8 +51,8 @@ a {
 }
 
 .header .wrap {
-  max-width: 1400px; /* ← ИСПРАВЛЕНО: Добавлен max-width */
-  margin: 0 auto; /* ← ИСПРАВЛЕНО: Центрирование */
+  max-width: 1400px;
+  margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -51,7 +66,7 @@ a {
   font-size: 1.3rem;
   color: white;
   white-space: nowrap;
-  flex-shrink: 0; /* ← ДОБАВЛЕНО */
+  flex-shrink: 0;
 }
 
 .logo .dot {
@@ -63,8 +78,8 @@ a {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  order: 3; /* ← ИСПРАВЛЕНО: было 5 */
-  margin: 0 auto; /* ← ДОБАВЛЕНО: Центрирование */
+  order: 3;
+  margin: 0 auto;
 }
 
 .nav a {
@@ -92,9 +107,9 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
+  min-height: 48px;
   flex-shrink: 0;
-  order: 2; /* ← ИСПРАВЛЕНО: было 4 */
+  order: 2;
 }
 
 .cta-link:hover {
@@ -105,7 +120,7 @@ a {
 .lang-switch {
   position: relative;
   flex-shrink: 0;
-  order: 4; /* ← ИСПРАВЛЕНО: было 15 */
+  order: 4;
 }
 
 .lang-switch button {
@@ -119,7 +134,7 @@ a {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
-  min-height: 40px;
+  min-height: 48px;
 }
 
 .lang-switch button img {
@@ -138,7 +153,7 @@ a {
   list-style: none;
   min-width: 120px;
   overflow: hidden;
-  z-index: 10000; /* ← ДОБАВЛЕНО */
+  z-index: 10000;
 }
 
 .lang-switch ul li {
@@ -148,7 +163,7 @@ a {
   align-items: center;
   gap: 0.5rem;
   transition: background 0.2s;
-  min-height: 44px;
+  min-height: 48px;
 }
 
 .lang-switch ul li:hover {
@@ -179,11 +194,24 @@ a {
   cursor: pointer;
   padding: 0.5rem;
   line-height: 1;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: 48px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.burger:hover,
+.burger:focus {
+  background: rgba(255, 255, 255, 0.1);
+  outline: 2px solid #f90;
+  outline-offset: 2px;
+}
+
+.burger:active {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .mobile-cta {
@@ -389,7 +417,7 @@ a {
   font-weight: 600;
   transition: background 0.2s;
   border: 1px solid #e0e0e0;
-  min-height: 44px;
+  min-height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -659,13 +687,13 @@ a {
 
 /* Press / Media Section */
 .section#press-media h3 {
-  margin-top: 0; /* Первый h3 без отступа */
+  margin-top: 0;
 }
 
 .section#press-media h3:not(:first-of-type) {
-  margin-top: 4rem; /* ← ДОБАВЛЕНО: Большой отступ перед Interviews */
-  padding-top: 2rem; /* ← ДОБАВЛЕНО: Дополнительный padding */
-  border-top: 1px solid #e0e0e0; /* ← ДОБАВЛЕНО: Визуальный разделитель */
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
 }
 
 /* Press Grid */
@@ -673,7 +701,7 @@ a {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 2rem; /* ← Вернули обратно */
+  margin-top: 2rem;
 }
 
 .press-card {
@@ -738,7 +766,6 @@ a {
 }
 
 /* ===== CASE STUDY GALLERY ===== */
-/* ИСПРАВЛЕНО: Горизонтальная прокрутка для всех размеров */
 .case-gallery {
   display: flex;
   gap: 1rem;
@@ -746,10 +773,11 @@ a {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-padding: 1rem;
   padding-bottom: 1rem;
 }
 
-/* Скрываем скроллбар но оставляем функционал */
 .case-gallery::-webkit-scrollbar {
   height: 8px;
 }
@@ -862,7 +890,7 @@ a {
   font-size: 0.95rem;
   transition: background 0.2s;
   white-space: nowrap;
-  min-height: 44px;
+  min-height: 48px;
 }
 
 .cookie-buttons button:hover {
@@ -899,7 +927,7 @@ a {
 }
 
 .cookie-modal-content * {
-  color: #1a1f3a; /* ← ДОБАВЛЕНО: Принудительно чёрный текст */
+  color: #1a1f3a;
 }
 
 .cookie-modal-content h3 {
@@ -915,14 +943,14 @@ a {
 }
 
 .cookie-modal-content label {
-  display: grid; /* ← ИСПРАВЛЕНО: Было flex */
-  grid-template-columns: auto 1fr; /* ← ДОБАВЛЕНО: Checkbox + текст */
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 1rem; /* ← Увеличен gap */
+  gap: 1rem;
   padding: 0.75rem 0.5rem;
   cursor: pointer;
   transition: background 0.2s;
-  min-height: 44px;
+  min-height: 48px;
 }
 
 .cookie-modal-content label input[type="checkbox"] {
@@ -967,7 +995,7 @@ a {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
-  min-height: 44px;
+  min-height: 48px;
 }
 
 .cookie-modal-actions button:hover {
@@ -1036,7 +1064,7 @@ body.menu-open::before {
 /* ===== MOBILE ADAPTATIONS (max-width: 768px) ===== */
 @media (max-width: 768px) {
   body {
-    padding-top: 140px; /* ← ИСПРАВЛЕНО: Увеличен для header + CTA */
+    padding-top: 100px;
     font-size: 16px;
   }
 
@@ -1068,33 +1096,43 @@ body.menu-open::before {
   }
 
   .header .wrap {
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.5rem;
     align-items: center;
-    position: relative;
-    gap: 0.3rem;
     padding: 0.7rem 1rem;
+    padding-left: max(1rem, var(--safe-area-inset-left));
+    padding-right: max(1rem, var(--safe-area-inset-right));
+    position: relative;
   }
 
   .header .wrap .logo {
-    order: 1;
-    flex: 0 0 auto;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
     font-size: 1.15rem;
+    z-index: 1;
   }
 
   .header .wrap .mobile-header-row {
-    order: 2;
-    margin-left: auto;
-    flex: 0 0 auto;
+    grid-column: 1 / -1;
+    grid-row: 1;
     display: flex;
-    flex-direction: row; /* ← ИСПРАВЛЕНО: Было row-reverse */
+    justify-content: space-between;
+    align-items: center;
     gap: 0.8rem;
+    pointer-events: none;
+  }
+
+  .header .wrap .mobile-header-row > * {
+    pointer-events: auto;
   }
 
   .header .wrap .mobile-header-row .lang-switch button {
     padding: 0.5rem 0.8rem;
     font-size: 0.85rem;
-    min-height: 40px;
+    min-height: 48px;
   }
 
   .header .wrap .mobile-header-row .lang-switch button img {
@@ -1107,22 +1145,21 @@ body.menu-open::before {
   }
 
   .header .wrap .mobile-cta {
-    order: 3;
-    flex: 0 0 100%;
-    margin-top: 0.5rem;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 0;
   }
 
   /* МОБИЛЬНОЕ МЕНЮ */
-  /* МОБИЛЬНОЕ МЕНЮ */
   .nav {
-    display: none; /* ← ИСПРАВЛЕНО: Скрыто по умолчанию */
+    display: none;
     flex-direction: column;
     position: fixed;
-    top: 140px; /* ← ИСПРАВЛЕНО: Под header + CTA */
-    right: -100%; /* ← ИСПРАВЛЕНО: Скрыто справа */
+    top: 100px;
+    right: -100%;
     width: 280px;
     max-width: 85vw;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 100px);
     background: rgba(11, 30, 89, 0.98);
     backdrop-filter: blur(10px);
     border-left: 1px solid rgba(255, 255, 255, 0.15);
@@ -1132,12 +1169,14 @@ body.menu-open::before {
     z-index: 9999;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
     overflow-y: auto;
+    will-change: transform;
+    transform: translateZ(0);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .nav.open {
-    display: flex; /* ← Показываем */
-    right: 0; /* ← ИСПРАВЛЕНО: Выезжает */
+    display: flex;
+    right: 0;
   }
 
   .nav a {
@@ -1148,7 +1187,7 @@ body.menu-open::before {
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
     font-size: 1rem;
-    min-height: 44px;
+    min-height: 48px;
     display: flex;
     align-items: center;
   }
@@ -1224,14 +1263,14 @@ body.menu-open::before {
     padding: 1.25rem;
   }
 
-  /* CASE GALLERY - Мобильная версия */
+  /* CASE GALLERY */
   .case-gallery {
     gap: 0.75rem;
     padding-bottom: 0.75rem;
   }
 
   .case-gallery img {
-    width: 85vw; /* ← ИСПРАВЛЕНО: 85% ширины экрана */
+    width: 85vw;
     height: 240px;
   }
 
@@ -1346,7 +1385,7 @@ body.menu-open::before {
   .cookie-modal-content label {
     padding: 0.75rem 0.5rem;
     font-size: 0.95rem;
-    min-height: 44px;
+    min-height: 48px;
   }
 
   .cookie-modal-actions button {
@@ -1366,6 +1405,8 @@ body.menu-open::before {
   .footer {
     font-size: 0.85rem;
     padding: 1.5rem 1rem;
+    padding-left: max(1rem, var(--safe-area-inset-left));
+    padding-right: max(1rem, var(--safe-area-inset-right));
     line-height: 1.8;
   }
 }
@@ -1385,7 +1426,7 @@ body.menu-open::before {
   }
 
   .nav {
-    width: 100%; /* ← Полноэкранное меню */
+    width: 100%;
     max-width: 100%;
     border-radius: 0;
   }
@@ -1395,7 +1436,7 @@ body.menu-open::before {
   }
 
   .case-gallery img {
-    width: 90vw; /* ← Еще шире на маленьких экранах */
+    width: 90vw;
   }
 }
 
@@ -1425,7 +1466,6 @@ body.menu-open::before {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Галерея на планшетах */
   .case-gallery img {
     width: 350px;
     height: 260px;

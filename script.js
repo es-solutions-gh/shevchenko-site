@@ -202,7 +202,6 @@ document.querySelectorAll('[data-lang]').forEach(item => {
 })();
 
 // ===== DYNAMIC SCROLL PADDING =====
-// УЛУЧШЕНО: Динамический расчет на основе высоты header
 function updateScrollPadding() {
   const header = document.querySelector('.header');
   if (header) {
@@ -306,7 +305,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===== LAZY LOADING IMAGES =====
-// НОВОЕ: Автоматическое lazy loading для всех изображений
 document.addEventListener('DOMContentLoaded', () => {
   const images = document.querySelectorAll('img:not([loading])');
   images.forEach(img => {
@@ -315,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== PERFORMANCE: DEFER EXTERNAL SCRIPTS =====
-// НОВОЕ: Ленивая загрузка Calendly при первом клике
 let calendlyLoaded = false;
 
 function loadCalendly(callback) {
@@ -364,7 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== SMOOTH SCROLL POLYFILL FOR OLDER BROWSERS =====
-// НОВОЕ: Плавная прокрутка для всех якорных ссылок
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
@@ -396,7 +392,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===== ESCAPE KEY TO CLOSE MODALS =====
-// НОВОЕ: Закрытие модалок по ESC
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' || e.key === 'Esc') {
     // Close mobile menu
@@ -419,20 +414,34 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ===== TOUCH FRIENDLY: PREVENT DOUBLE-TAP ZOOM ON BUTTONS =====
-// НОВОЕ: Отключаем двойной тап для зума на кнопках (iOS)
+// ИСПРАВЛЕНО: Теперь не блокирует скролл
 document.addEventListener('DOMContentLoaded', () => {
   const touchElements = document.querySelectorAll('button, .cta-link, .linkbtn, .burger');
   
   touchElements.forEach(element => {
+    let touchStartTime = 0;
+    let touchStartY = 0;
+    
+    element.addEventListener('touchstart', (e) => {
+      touchStartTime = Date.now();
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
     element.addEventListener('touchend', (e) => {
-      e.preventDefault();
-      element.click();
+      const touchDuration = Date.now() - touchStartTime;
+      const touchEndY = e.changedTouches[0].clientY;
+      const verticalMovement = Math.abs(touchEndY - touchStartY);
+      
+      // Только если это был быстрый тап без скролла
+      if (touchDuration < 200 && verticalMovement < 10) {
+        e.preventDefault();
+        element.click();
+      }
     }, { passive: false });
   });
 });
 
 // ===== VIEWPORT HEIGHT FIX FOR MOBILE BROWSERS =====
-// НОВОЕ: Исправляем 100vh на мобильных (учитываем адресную строку)
 function setVhProperty() {
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -445,3 +454,4 @@ window.addEventListener('resize', setVhProperty);
 console.log('🚀 Mobile optimized scripts loaded successfully');
 console.log('📱 Viewport:', window.innerWidth, 'x', window.innerHeight);
 console.log('🌐 Language:', localStorage.getItem('preferredLanguage') || 'en');
+console.log('✅ All mobile fixes applied');
