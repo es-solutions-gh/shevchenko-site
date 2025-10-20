@@ -76,7 +76,7 @@ a {
 /* Navigation */
 .nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
   order: 3;
   margin: 0 auto;
@@ -84,7 +84,7 @@ a {
 
 .nav a {
   color: white;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   transition: color 0.2s ease;
   white-space: nowrap;
 }
@@ -917,8 +917,8 @@ a {
 
 .cookie-modal-content {
   position: relative;
-  background: white;
-  color: #1a1f3a;
+  background: white !important;
+  color: #1a1f3a !important;
   padding: 2rem;
   border-radius: 8px;
   max-width: 500px;
@@ -926,14 +926,10 @@ a {
   font-size: 1rem;
 }
 
-.cookie-modal-content * {
-  color: #1a1f3a;
-}
-
 .cookie-modal-content h3 {
-  margin: 0 0 1.5rem;
-  color: #1a1f3a;
-  font-size: 1.5rem;
+  margin: 0 0 1.5rem !important;
+  color: #1a1f3a !important;
+  font-size: 1.5rem !important;
 }
 
 .cookie-modal-content form {
@@ -943,24 +939,26 @@ a {
 }
 
 .cookie-modal-content label {
-  display: flex;
+  display: flex !important;
   align-items: flex-start;
   gap: 1rem;
   padding: 0.75rem 0.5rem;
   cursor: pointer;
   transition: background 0.2s;
   min-height: 48px;
+  color: #1a1f3a !important;
+}
+
+.cookie-modal-content label strong,
+.cookie-modal-content label span {
+  flex: 1;
+  text-align: left;
+  color: #1a1f3a !important;
 }
 
 .cookie-modal-content label input[type="checkbox"] {
   margin-top: 2px;
   flex-shrink: 0;
-}
-
-.cookie-modal-content label span,
-.cookie-modal-content label strong {
-  flex: 1;
-  text-align: left;
 }
 
 .cookie-modal-content label:hover {
@@ -1065,7 +1063,7 @@ body.menu-open::before {
 /* ===== MOBILE ADAPTATIONS (max-width: 768px) ===== */
 @media (max-width: 768px) {
   body {
-    padding-top: 160px;
+    padding-top: 170px;
     font-size: 16px;
   }
 
@@ -1157,17 +1155,17 @@ body.menu-open::before {
     display: none;
     flex-direction: column;
     position: fixed;
-    top: 160px;
+    top: 170px;
     right: -100%;
     width: 280px;
     max-width: 85vw;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 170px);
     background: rgba(11, 30, 89, 0.98);
     backdrop-filter: blur(10px);
     border-left: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 8px 0 0 0;
-    padding: 1rem;
-    gap: 0.3rem;
+    padding: 0.8rem;
+    gap: 0.15rem;
     z-index: 9999;
     box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
     overflow-y: auto;
@@ -1182,14 +1180,14 @@ body.menu-open::before {
   }
 
   .nav a {
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 1rem;
     background: transparent;
     border-radius: 8px;
     text-align: left;
     transition: all 0.2s ease;
     border-left: 3px solid transparent;
-    font-size: 1rem;
-    min-height: 48px;
+    font-size: 0.95rem;
+    min-height: 42px;
     display: flex;
     align-items: center;
   }
@@ -1502,5 +1500,16 @@ body.menu-open::before {
   .header .wrap {
     max-width: 1400px;
     margin: 0 auto;
+  }
+}
+
+/* ===== EXTRA WIDE FOR RU/UK MENUS (1300px-1400px) ===== */
+@media (min-width: 1200px) and (max-width: 1350px) {
+  .nav {
+    gap: 0.8rem;
+  }
+  
+  .nav a {
+    font-size: 0.82rem;
   }
 }
