@@ -10,10 +10,14 @@
  <body>
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="/index.html">shevchenko<span class="dot">.</span>solutions</a>
+    <!-- Логотип (десктоп) -->
+    <a class="logo desktop-only" href="/index.html">shevchenko<span class="dot">.</span>solutions</a>
+    
     <nav class="nav">
-      <a class="cta-link desktop-only" href="/index.html"><strong>   ⬅ Back   </strong></a>
+      <a class="cta-link desktop-only" href="/index.html"><strong>   ← Back   </strong></a>
     </nav>
+    
+    <!-- Переключатель языка (десктоп) -->
     <div class="lang-switch desktop-only">
       <button id="current-lang-desktop" type="button">
         <img alt="EN" id="current-flag-desktop" src="/assets/flags/ENG.svg" />
@@ -25,9 +29,14 @@
         <li data-lang="ru"><img alt="" src="/assets/flags/RUS.svg" /> RUS</li>
       </ul>
     </div>
+    
+    <!-- Логотип (мобильный) -->
+    <a class="logo mobile-only" href="/index.html">shevchenko<span class="dot">.</span>solutions</a>
+    
+    <!-- Мобильная строка: Бургер + Язык -->
     <div class="mobile-header-row">
-  <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
-  <div class="lang-switch mobile-top">
+      <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+      <div class="lang-switch mobile-top">
         <button id="current-lang" type="button">
           <img alt="EN" id="current-flag" src="/assets/flags/ENG.svg" />
           <span id="current-code">ENG</span> ▾
@@ -38,7 +47,8 @@
           <li data-lang="ru"><img alt="" src="/assets/flags/RUS.svg" /> RUS</li>
         </ul>
       </div>
-      </div>
+    </div>
+  </div>
 </header>
  
 <main>

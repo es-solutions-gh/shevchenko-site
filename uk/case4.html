@@ -13,52 +13,61 @@
 
   <body>
     <header class='header'>
-      <div class='wrap'>
-        <a href="index.html" class="logo">
-          shevchenko<span class='dot'>.</span>solutions
-        </a>
+  <div class='wrap'>
+    <!-- Логотип (десктоп) -->
+    <a href="index.html" class="logo desktop-only">
+      shevchenko<span class='dot'>.</span>solutions
+    </a>
 
-        <a class='cta-link desktop-only' href='#' onclick="Calendly.initPopupWidget({url:'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
-          ОБГОВОРИТИ СХОЖИЙ КЕЙС?
-        </a>
+    <!-- CTA (десктоп) -->
+    <a class='cta-link desktop-only' href='#' onclick="Calendly.initPopupWidget({url:'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
+      ОБГОВОРИТИ СХОЖИЙ КЕЙС?
+    </a>
 
-        <nav class='nav'>
-          <a class='nav-link' href='index.html#how-i-help'>Експертиза</a>
-          <a class='nav-link' href='index.html#pricing'>Формати та гонорар</a>
-          <a class='nav-link' href='index.html#contact'>Контакти</a>
-          <a class='nav-link back-link' href='index.html#case-studies'>Назад до кейсів</a>
-        </nav>
+    <!-- Навигация упрощенная -->
+    <nav class='nav'>
+      <a class='nav-link' href='index.html#how-i-help'>Експертиза</a>
+      <a class='nav-link' href='index.html#pricing'>Формати та гонорар</a>
+      <a class='nav-link' href='index.html#contact'>Контакти</a>
+      <a class='nav-link back-link' href='index.html#case-studies' style="font-weight:bold; margin-left:auto;">Назад до кейсів</a>
+    </nav>
 
-      <div class="lang-switch desktop-only">
-        <button id="current-lang-desktop" type="button">
-          <img id="current-flag-desktop" src="/assets/flags/UKR.svg" alt="UK">
-          <span id="current-code-desktop">UKR</span> ▾
+    <!-- Переключатель языка (десктоп) -->
+    <div class="lang-switch desktop-only">
+      <button id="current-lang-desktop" type="button">
+        <img id="current-flag-desktop" src="/assets/flags/UKR.svg" alt="UK">
+        <span id="current-code-desktop">UKR</span> ▾
+      </button>
+      <ul id="lang-menu-desktop" class="hidden">
+        <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+        <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+        <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+      </ul>
+    </div>
+
+    <!-- Логотип (мобильный) -->
+    <a href="index.html" class="logo mobile-only">
+      shevchenko<span class='dot'>.</span>solutions
+    </a>
+
+    <!-- Мобильная строка: Бургер + Язык -->
+    <div class="mobile-header-row">
+      <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+      <div class="lang-switch mobile-top">
+        <button id="current-lang" type="button">
+          <img id="current-flag" src="/assets/flags/UKR.svg" alt="UK">
+          <span id="current-code">UKR</span> ▾
         </button>
-        <ul id="lang-menu-desktop" class="hidden">
+        <ul id="lang-menu" class="hidden">
           <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
           <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
           <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
         </ul>
       </div>
+    </div>
 
-      <div class="mobile-header-row">
-  <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
-  <div class="lang-switch mobile-top">
-          <button id="current-lang" type="button">
-            <img id="current-flag" src="/assets/flags/UKR.svg" alt="UK">
-            <span id="current-code">UKR</span> ▾
-          </button>
-          <ul id="lang-menu" class="hidden">
-            <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
-            <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
-            <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
-          </ul>
-        </div>
-        <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
-      </div>
-        
-      </div>
-    </header>
+  </div>
+</header>
 
     <section class='section'>
       <div class='container'>

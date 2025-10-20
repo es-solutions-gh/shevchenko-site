@@ -13,12 +13,12 @@
 <header class="header">
   <div class="wrap">
 
-    <!-- Логотип -->
-    <a href="/index.html" class="logo">
+    <!-- Логотип (десктоп) -->
+    <a href="/index.html" class="logo desktop-only">
       shevchenko<span class="dot">.</span>solutions
     </a>
 
-    <!-- CTA -->
+    <!-- CTA (десктоп) -->
     <a class="cta-link desktop-only" href=""
        onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'}); return false;">
       BOOK A FREE 30' CALL!
@@ -48,11 +48,15 @@
       </ul>
     </div>
 
-    <!-- Мобильная строка -->
+    <!-- Логотип (мобильный) -->
+    <a href="/index.html" class="logo mobile-only">
+      shevchenko<span class="dot">.</span>solutions
+    </a>
+
+    <!-- Мобильная строка: Бургер + Язык -->
     <div class="mobile-header-row">
-  <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
-  <div class="lang-switch mobile-top">
       <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+      <div class="lang-switch mobile-top">
         <button id="current-lang" type="button">
           <img id="current-flag" src="/assets/flags/ENG.svg" alt="EN">
           <span id="current-code">ENG</span> ▾

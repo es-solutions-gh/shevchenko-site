@@ -14,8 +14,8 @@
 <header class="header">
   <div class="wrap">
 
-  <!-- Логотип -->
-  <a href="index.html" class="logo">
+  <!-- Логотип (десктоп) -->
+  <a href="index.html" class="logo desktop-only">
     shevchenko<span class="dot">.</span>solutions
   </a>
 
@@ -49,10 +49,15 @@
     </ul>
   </div>
 
-  <!-- Мобильная строка: язык + бургер -->
+  <!-- Логотип (мобильный) -->
+  <a href="index.html" class="logo mobile-only">
+    shevchenko<span class="dot">.</span>solutions
+  </a>
+
+  <!-- Мобильная строка: Бургер + Язык -->
   <div class="mobile-header-row">
-  <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
-  <div class="lang-switch mobile-top">
+    <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+    <div class="lang-switch mobile-top">
       <button id="current-lang" type="button">
         <img id="current-flag" src="/assets/flags/UKR.svg" alt="UK">
         <span id="current-code">UKR</span> ▾
@@ -63,7 +68,6 @@
         <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
       </ul>
     </div>
-    <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
   </div>
 
   <!-- мобильная CTA -->

@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Кейс: Защита актива стоимостью €132 млн от давления государства</title>
   <link rel="stylesheet" href="/styles.css" />
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  
   <script src="/script.js" defer></script>
-
 </head>
 <body>
 
-
   <header class="header">
     <div class="wrap">
-      <a href="/index.html" class="logo">shevchenko<span class="dot">.</span>solutions</a>
+      <!-- Desktop элементы -->
+      <a href="/index.html" class="logo desktop-only">shevchenko<span class="dot">.</span>solutions</a>
 
       <a class="cta-link desktop-only" href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
         ОБСУДИТЬ ПОХОЖИЙ КЕЙС?
@@ -41,9 +37,12 @@
         </ul>
       </div>
 
+      <!-- МОБИЛЬНАЯ ВЕРСИЯ (3 строки) -->
+      <a href="/index.html" class="logo mobile-only">shevchenko<span class="dot">.</span>solutions</a>
+
       <div class="mobile-header-row">
-  <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
-  <div class="lang-switch mobile-top">
+        <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+        <div class="lang-switch mobile-top">
           <button id="current-lang" type="button">
             <img id="current-flag" src="/assets/flags/RUS.svg" alt="RU">
             <span id="current-code">RUS</span> ▾
@@ -54,8 +53,11 @@
             <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
           </ul>
         </div>
-        <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
       </div>
+
+      <a class="cta-link mobile-cta" href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
+        ОБСУДИТЬ ПОХОЖИЙ КЕЙС?
+      </a>
     </div>
   </header>
 
@@ -109,13 +111,12 @@
 <h3>Заключение</h3>
 <p>Этот кейс демонстрирует, что защита акционерной стоимости в нестабильной политической среде требует дальновидности, смелости и умения мобилизовать глобальные сети в условиях экстремального давления. В роли генерального директора я сохранил стратегический актив от враждебных действий государства, защитил людей и репутацию группы. Даже в самых неблагоприятных условиях дисциплинированное лидерство и бескомпромиссная честность могут изменить исход от почти неизбежной потери к выживанию и последующему успеху.</p>
 
+    </div>
+  </section>
 
-</section> <!-- Закрываем .section и .container внутри -->
-<footer class='footer'>
-© <span id="y"></span>
-Evgeny Shevchenko. Все права защищены.
-</footer>
-
+  <footer class='footer'>
+    © <span id="y"></span> Evgeny Shevchenko. Все права защищены.
+  </footer>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
