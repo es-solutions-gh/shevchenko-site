@@ -930,10 +930,6 @@ a {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-#cookie-modal .cookie-modal-content * {
-  color: #1a1f3a !important;
-}
-
 #cookie-modal .cookie-modal-content h3 {
   margin: 0 0 1.5rem !important;
   color: #1a1f3a !important;
