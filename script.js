@@ -10,20 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
     banner.classList.remove("hidden");
   }
 
-  // Always initialize modal handlers (even if banner is missing)
+  // Always initialize modal handlers
   if (manageBtn && modal) {
     manageBtn.addEventListener("click", () => {
       if (banner) banner.classList.add("hidden");
       
-      // КРИТИЧНО: force reflow перед снятием .hidden для Chrome
-      void modal.offsetHeight;
-      modal.classList.remove("hidden");
+      // ФИНАЛЬНОЕ ИСПРАВЛЕНИЕ: Используем класс .show вместо снятия .hidden
+      modal.classList.add("show");
+      modal.classList.remove("modal-hidden", "hidden");
     });
   }
 
   if (closeBtn && modal) {
     closeBtn.addEventListener("click", () => {
-      modal.classList.add("hidden");
+      modal.classList.remove("show");
+      modal.classList.add("modal-hidden");
     });
   }
 
@@ -31,7 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (modal) {
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {
-        modal.classList.add("hidden");
+        modal.classList.remove("show");
+        modal.classList.add("modal-hidden");
       }
     });
   }
@@ -40,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       localStorage.setItem("cookie-consent", "custom");
-      modal.classList.add("hidden");
+      modal.classList.remove("show");
+      modal.classList.add("modal-hidden");
       if (banner) banner.classList.add("hidden");
     });
   }
@@ -50,7 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
     acceptAllBtn.addEventListener("click", () => {
       localStorage.setItem("cookie-consent", "all");
       banner.classList.add("hidden");
-      if (modal) modal.classList.add("hidden");
+      if (modal) {
+        modal.classList.remove("show");
+        modal.classList.add("modal-hidden");
+      }
     });
   }
 });
