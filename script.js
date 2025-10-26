@@ -1,160 +1,457 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // ====================
-  // COOKIE CONSENT
-  // ====================
-  const banner = document.getElementById("cookie-banner");
-  const modal = document.getElementById("cookie-modal");
-  const manageBtn = document.getElementById("cookie-manage");
-  const closeBtn = document.getElementById("cookie-close-modal");
-  const form = document.getElementById("cookie-form");
+// ===== MOBILE MENU TOGGLE =====
+const burgerBtn = document.getElementById('burger-btn');
+const nav = document.querySelector('.nav');
+const body = document.body;
 
-  // Show banner only if not already accepted
-  if (banner && !localStorage.getItem("cookie-consent")) {
-    banner.classList.remove("hidden");
+// Toggle mobile menu
+burgerBtn?.addEventListener('click', function (e) {
+  e.stopPropagation();
+  nav?.classList.toggle('open');
+  body.classList.toggle('menu-open');
+  
+  // Блокировка скролла при открытом меню
+  if (nav?.classList.contains('open')) {
+    body.style.overflow = 'hidden';
+  } else {
+    body.style.overflow = '';
+  }
+});
+
+// Закрытие меню при клике вне его
+document.addEventListener('click', function (e) {
+  if (nav?.classList.contains('open') && 
+      !nav.contains(e.target) && 
+      !burgerBtn.contains(e.target)) {
+    nav.classList.remove('open');
+    body.classList.remove('menu-open');
+    body.style.overflow = '';
+  }
+});
+
+// Закрытие меню при клике на ссылку
+nav?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      nav.classList.remove('open');
+      body.classList.remove('menu-open');
+      body.style.overflow = '';
+    }
+  });
+});
+
+// ===== LANGUAGE SWITCHER =====
+
+// Desktop language menu toggle
+const desktopLangBtn = document.getElementById('current-lang-desktop');
+const desktopLangMenu = document.getElementById('lang-menu-desktop');
+
+desktopLangBtn?.addEventListener('click', function (e) {
+  e.stopPropagation();
+  desktopLangMenu?.classList.toggle('hidden');
+});
+
+// Mobile language menu toggle
+const mobileLangBtn = document.getElementById('current-lang');
+const mobileLangMenu = document.getElementById('lang-menu');
+
+mobileLangBtn?.addEventListener('click', function (e) {
+  e.stopPropagation();
+  mobileLangMenu?.classList.toggle('hidden');
+});
+
+// Close language menus when clicking outside
+document.addEventListener('click', function (e) {
+  if (desktopLangMenu && 
+      !desktopLangMenu.contains(e.target) && 
+      e.target !== desktopLangBtn) {
+    desktopLangMenu.classList.add('hidden');
   }
 
-  // Always initialize modal handlers
-  if (manageBtn && modal) {
-    manageBtn.addEventListener("click", () => {
-      if (banner) banner.classList.add("hidden");
-      modal.classList.remove("hidden");
-    });
+  if (mobileLangMenu && 
+      !mobileLangMenu.contains(e.target) && 
+      e.target !== mobileLangBtn) {
+    mobileLangMenu.classList.add('hidden');
   }
+});
 
-  if (closeBtn && modal) {
-    closeBtn.addEventListener("click", () => {
-      modal.classList.add("hidden");
-    });
-  }
+// ===== LANGUAGE SWITCHING LOGIC =====
+document.querySelectorAll('[data-lang]').forEach(item => {
+  item.addEventListener('click', () => {
+    const selectedLang = item.getAttribute('data-lang');
 
-  // Close modal on backdrop click
-  if (modal) {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
+    // Save selected language to localStorage
+    localStorage.setItem('preferredLanguage', selectedLang);
+
+    // Cookie policy pages
+    const isCookiePolicy = window.location.pathname.includes('cookie-policy');
+    if (isCookiePolicy) {
+      window.location.href = `/cookie-policy.${selectedLang}.html`;
+      return;
+    }
+
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+
+    let currentLang = null;
+    if (['en', 'ru', 'uk'].includes(pathParts[0])) {
+      currentLang = pathParts[0];
+    }
+
+    const remainingPath = currentLang ? pathParts.slice(1).join('/') : pathParts.join('/');
+    const isHome = remainingPath === '' || remainingPath === 'index.html';
+    const isCasePage = remainingPath.startsWith('case') && remainingPath.endsWith('.html');
+
+    let newPath = `/${selectedLang}/`;
+    if (isCasePage) {
+      newPath += remainingPath;
+    } else if (!isHome) {
+      newPath += remainingPath;
+    }
+
+    // Save scroll position
+    const scrollY = window.scrollY;
+    sessionStorage.setItem('scrollPosition', scrollY);
+
+    window.location.href = newPath;
+  });
+});
+
+// ===== APPLY SAVED LANGUAGE PREFERENCE ON PAGE LOAD =====
+(function() {
+  const preferredLang = localStorage.getItem('preferredLanguage');
+  if (!preferredLang) return;
+
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+
+  // Cookie policy pages
+  const isCookiePolicy = window.location.pathname.includes('cookie-policy');
+  if (isCookiePolicy) {
+    const match = window.location.pathname.match(/cookie-policy\.([a-z]{2})\.html/);
+    const currentLang = match ? match[1] : 'en';
+
+    if (currentLang !== preferredLang) {
+      window.location.href = `/cookie-policy.${preferredLang}.html`;
+      return;
+    }
+  } else {
+    // Main pages
+    let currentLang = null;
+    if (['en', 'ru', 'uk'].includes(pathParts[0])) {
+      currentLang = pathParts[0];
+    } else {
+      currentLang = 'en';
+    }
+
+    if (currentLang !== preferredLang) {
+      const remainingPath = currentLang && pathParts[0] === currentLang ? pathParts.slice(1).join('/') : pathParts.join('/');
+      const isHome = remainingPath === '' || remainingPath === 'index.html';
+      const isCasePage = remainingPath.startsWith('case') && remainingPath.endsWith('.html');
+
+      let newPath = `/${preferredLang}/`;
+      if (isCasePage) {
+        newPath += remainingPath;
+      } else if (!isHome) {
+        newPath += remainingPath;
       }
-    });
+
+      window.location.href = newPath;
+      return;
+    }
+  }
+})();
+
+// ===== UPDATE LANGUAGE INDICATOR =====
+(function() {
+  const pathname = window.location.pathname;
+  let currentLang = 'en';
+
+  // Detect from cookie-policy filename
+  if (pathname.includes('cookie-policy')) {
+    const match = pathname.match(/cookie-policy\.([a-z]{2})\.html/);
+    if (match) {
+      currentLang = match[1];
+    }
+  }
+  // Detect from folder structure
+  else {
+    const pathParts = pathname.split('/').filter(Boolean);
+    if (['en', 'ru', 'uk'].includes(pathParts[0])) {
+      currentLang = pathParts[0];
+    }
   }
 
-  if (form && modal) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      localStorage.setItem("cookie-consent", "custom");
-      modal.classList.add("hidden");
-      if (banner) banner.classList.add("hidden");
-    });
-  }
-
-  const acceptAllBtn = document.getElementById("cookie-accept");
-  if (acceptAllBtn && banner) {
-    acceptAllBtn.addEventListener("click", () => {
-      localStorage.setItem("cookie-consent", "all");
-      banner.classList.add("hidden");
-      if (modal) modal.classList.add("hidden");
-    });
-  }
-
-  // ====================
-  // MOBILE MENU
-  // ====================
-  const burger = document.getElementById("burger-btn");
-  const nav = document.querySelector(".nav");
-  const body = document.body;
-
-  if (burger && nav) {
-    burger.addEventListener("click", () => {
-      nav.classList.toggle("open");
-      body.classList.toggle("menu-open");
-    });
-
-    // Закрытие меню при клике на ссылку
-    const navLinks = nav.querySelectorAll("a");
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        nav.classList.remove("open");
-        body.classList.remove("menu-open");
-      });
-    });
-
-    // Закрытие меню при клике вне его
-    document.addEventListener("click", (e) => {
-      if (
-        !nav.contains(e.target) &&
-        !burger.contains(e.target) &&
-        nav.classList.contains("open")
-      ) {
-        nav.classList.remove("open");
-        body.classList.remove("menu-open");
-      }
-    });
-  }
-
-  // ====================
-  // LANGUAGE SWITCHER
-  // ====================
-  const langButtons = [
-    {
-      button: document.getElementById("current-lang"),
-      menu: document.getElementById("lang-menu"),
-      flag: document.getElementById("current-flag"),
-      code: document.getElementById("current-code"),
-    },
-    {
-      button: document.getElementById("current-lang-desktop"),
-      menu: document.getElementById("lang-menu-desktop"),
-      flag: document.getElementById("current-flag-desktop"),
-      code: document.getElementById("current-code-desktop"),
-    },
-  ];
-
-  const langData = {
-    en: { flag: "/assets/flags/ENG.svg", code: "ENG", path: "/en/" },
-    uk: { flag: "/assets/flags/UKR.svg", code: "UKR", path: "/uk/" },
-    ru: { flag: "/assets/flags/RUS.svg", code: "RUS", path: "/ru/" },
+  const langConfig = {
+    'en': { flag: 'ENG.svg', code: 'ENG' },
+    'ru': { flag: 'RUS.svg', code: 'RUS' },
+    'uk': { flag: 'UKR.svg', code: 'UKR' }
   };
 
-  // Определяем текущий язык из URL
-  const currentPath = window.location.pathname;
-  let currentLang = "en";
-  if (currentPath.includes("/uk/")) currentLang = "uk";
-  else if (currentPath.includes("/ru/")) currentLang = "ru";
+  const config = langConfig[currentLang];
+  if (config) {
+    // Desktop
+    const desktopFlag = document.getElementById('current-flag-desktop');
+    const desktopCode = document.getElementById('current-code-desktop');
+    if (desktopFlag) desktopFlag.src = `/assets/flags/${config.flag}`;
+    if (desktopCode) desktopCode.textContent = config.code;
 
-  langButtons.forEach(({ button, menu, flag, code }) => {
-    if (!button || !menu) return;
+    // Mobile
+    const mobileFlag = document.getElementById('current-flag');
+    const mobileCode = document.getElementById('current-code');
+    if (mobileFlag) mobileFlag.src = `/assets/flags/${config.flag}`;
+    if (mobileCode) mobileCode.textContent = config.code;
+  }
+})();
 
-    // Устанавливаем текущий язык
-    if (flag) flag.src = langData[currentLang].flag;
-    if (code) code.textContent = langData[currentLang].code;
+// ===== DYNAMIC SCROLL PADDING =====
+function updateScrollPadding() {
+  const header = document.querySelector('.header');
+  if (header) {
+    const headerHeight = header.offsetHeight;
+    document.documentElement.style.scrollPaddingTop = `${headerHeight + 20}px`;
+  }
+}
 
-    // Открытие/закрытие меню
-    button.addEventListener("click", (e) => {
-      e.stopPropagation();
-      menu.classList.toggle("hidden");
+// Обновляем при загрузке
+window.addEventListener('load', updateScrollPadding);
+
+// Обновляем при изменении размера окна (с debounce)
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(updateScrollPadding, 250);
+});
+
+// ===== RESTORE SCROLL POSITION AFTER LANGUAGE SWITCH =====
+window.addEventListener('load', () => {
+  const savedScroll = sessionStorage.getItem('scrollPosition');
+  if (savedScroll) {
+    window.scrollTo(0, parseInt(savedScroll));
+    sessionStorage.removeItem('scrollPosition');
+  }
+});
+
+// ===== COOKIE CONSENT FUNCTIONALITY =====
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("cookie-banner");
+  const modal = document.getElementById("cookie-modal");
+  const acceptBtn = document.getElementById("cookie-accept");
+  const manageBtn = document.getElementById("cookie-manage");
+  const closeModalBtn = document.getElementById("cookie-close-modal");
+  const form = document.getElementById("cookie-form");
+  const analyticsInput = document.getElementById("analytics-cookies");
+  const marketingInput = document.getElementById("marketing-cookies");
+
+  if (!banner) return; // Exit if cookie banner doesn't exist
+
+  // Save preferences
+  function savePreferences(prefs) {
+    localStorage.setItem("cookie-preferences", JSON.stringify(prefs));
+    console.log("Cookie preferences saved:", prefs);
+  }
+
+  // Check if preferences exist
+  const savedPrefs = localStorage.getItem("cookie-preferences");
+  if (!savedPrefs) {
+    banner.classList.remove("hidden");
+    banner.style.display = "flex";
+  }
+
+  // Accept all cookies
+  acceptBtn?.addEventListener("click", () => {
+    savePreferences({
+      essential: true,
+      analytics: true,
+      marketing: true
     });
+    banner.classList.add("hidden");
+    banner.style.display = "none";
+  });
 
-    // Выбор языка
-    menu.querySelectorAll("li").forEach((li) => {
-      li.addEventListener("click", () => {
-        const selectedLang = li.getAttribute("data-lang");
-        if (selectedLang && langData[selectedLang]) {
-          window.location.href = langData[selectedLang].path;
+  // Open preferences modal
+  manageBtn?.addEventListener("click", () => {
+    modal?.classList.remove("hidden");
+    
+    // Load current preferences
+    if (savedPrefs) {
+      const prefs = JSON.parse(savedPrefs);
+      if (analyticsInput) analyticsInput.checked = prefs.analytics || false;
+      if (marketingInput) marketingInput.checked = prefs.marketing || false;
+    }
+  });
+
+  // Close modal
+  closeModalBtn?.addEventListener("click", () => {
+    modal?.classList.add("hidden");
+  });
+
+  // Save selected preferences
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    savePreferences({
+      essential: true,
+      analytics: analyticsInput?.checked || false,
+      marketing: marketingInput?.checked || false
+    });
+    modal?.classList.add("hidden");
+    banner.classList.add("hidden");
+    banner.style.display = "none";
+  });
+
+  // Close modal on overlay click
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+  });
+});
+
+// ===== LAZY LOADING IMAGES =====
+document.addEventListener('DOMContentLoaded', () => {
+  const images = document.querySelectorAll('img:not([loading])');
+  images.forEach(img => {
+    img.setAttribute('loading', 'lazy');
+  });
+});
+
+// ===== PERFORMANCE: DEFER EXTERNAL SCRIPTS =====
+let calendlyLoaded = false;
+
+function loadCalendly(callback) {
+  if (calendlyLoaded) {
+    callback();
+    return;
+  }
+
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'https://assets.calendly.com/assets/external/widget.css';
+  document.head.appendChild(link);
+
+  const script = document.createElement('script');
+  script.src = 'https://assets.calendly.com/assets/external/widget.js';
+  script.async = true;
+  script.onload = () => {
+    calendlyLoaded = true;
+    callback();
+  };
+  document.head.appendChild(script);
+}
+
+// Перехватываем клики на CTA кнопки
+document.addEventListener('DOMContentLoaded', () => {
+  const ctaLinks = document.querySelectorAll('[onclick*="Calendly"]');
+  
+  ctaLinks.forEach(link => {
+    // Удаляем inline onclick
+    const originalOnclick = link.getAttribute('onclick');
+    link.removeAttribute('onclick');
+    
+    // Добавляем event listener
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      loadCalendly(() => {
+        if (window.Calendly) {
+          Calendly.initPopupWidget({
+            url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'
+          });
         }
       });
     });
   });
-
-  // Закрытие меню языка при клике вне его
-  document.addEventListener("click", () => {
-    langButtons.forEach(({ menu }) => {
-      if (menu) menu.classList.add("hidden");
-    });
-  });
-
-  // ====================
-  // CALENDLY WIDGET
-  // ====================
-  const calendlyScript = document.createElement("script");
-  calendlyScript.src = "https://assets.calendly.com/assets/external/widget.js";
-  calendlyScript.async = true;
-  document.head.appendChild(calendlyScript);
 });
+
+// ===== SMOOTH SCROLL POLYFILL FOR OLDER BROWSERS =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const href = this.getAttribute('href');
+    
+    // Игнорируем пустые якоря
+    if (href === '#' || href === '#!') return;
+    
+    const target = document.querySelector(href);
+    if (target) {
+      e.preventDefault();
+      
+      const header = document.querySelector('.header');
+      const headerHeight = header ? header.offsetHeight : 70;
+      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+      
+      // Закрываем мобильное меню если открыто
+      if (nav?.classList.contains('open')) {
+        nav.classList.remove('open');
+        body.classList.remove('menu-open');
+        body.style.overflow = '';
+      }
+    }
+  });
+});
+
+// ===== ESCAPE KEY TO CLOSE MODALS =====
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' || e.key === 'Esc') {
+    // Close mobile menu
+    if (nav?.classList.contains('open')) {
+      nav.classList.remove('open');
+      body.classList.remove('menu-open');
+      body.style.overflow = '';
+    }
+    
+    // Close language menus
+    desktopLangMenu?.classList.add('hidden');
+    mobileLangMenu?.classList.add('hidden');
+    
+    // Close cookie modal
+    const cookieModal = document.getElementById('cookie-modal');
+    if (cookieModal && !cookieModal.classList.contains('hidden')) {
+      cookieModal.classList.add('hidden');
+    }
+  }
+});
+
+// ===== TOUCH FRIENDLY: PREVENT DOUBLE-TAP ZOOM ON BUTTONS =====
+// ИСПРАВЛЕНО: Теперь не блокирует скролл
+document.addEventListener('DOMContentLoaded', () => {
+  const touchElements = document.querySelectorAll('button, .cta-link, .linkbtn, .burger');
+  
+  touchElements.forEach(element => {
+    let touchStartTime = 0;
+    let touchStartY = 0;
+    
+    element.addEventListener('touchstart', (e) => {
+      touchStartTime = Date.now();
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    element.addEventListener('touchend', (e) => {
+      const touchDuration = Date.now() - touchStartTime;
+      const touchEndY = e.changedTouches[0].clientY;
+      const verticalMovement = Math.abs(touchEndY - touchStartY);
+      
+      // Только если это был быстрый тап без скролла
+      if (touchDuration < 200 && verticalMovement < 10) {
+        e.preventDefault();
+        element.click();
+      }
+    }, { passive: false });
+  });
+});
+
+// ===== VIEWPORT HEIGHT FIX FOR MOBILE BROWSERS =====
+function setVhProperty() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setVhProperty();
+window.addEventListener('resize', setVhProperty);
+
+// ===== CONSOLE INFO =====
+console.log('🚀 Mobile optimized scripts loaded successfully');
+console.log('📱 Viewport:', window.innerWidth, 'x', window.innerHeight);
+console.log('🌐 Language:', localStorage.getItem('preferredLanguage') || 'en');
+console.log('✅ All mobile fixes applied');

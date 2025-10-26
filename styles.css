@@ -897,7 +897,7 @@ a {
   background: #e88a00;
 }
 
-/* ===== COOKIE MODAL ===== */
+/* ===== COOKIE MODAL - ИСПРАВЛЕНО ДЛЯ CHROME ===== */
 #cookie-modal {
   position: fixed;
   top: 0;
@@ -905,7 +905,7 @@ a {
   width: 100vw;
   height: 100vh;
   background: rgba(10, 10, 10, 0.7);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 3000;
@@ -913,11 +913,14 @@ a {
   overflow-y: auto;
 }
 
+#cookie-modal:not(.hidden) {
+  display: flex !important;
+}
+
 /* Увеличена специфичность + явные цвета для Chrome */
 #cookie-modal .cookie-modal-content {
   position: relative;
   background: #ffffff !important;
-  color: #1a1f3a;
   padding: 1.5rem;
   border-radius: 8px;
   max-width: 500px;
@@ -1390,7 +1393,7 @@ body.menu-open::before {
   }
 
   #cookie-modal .cookie-modal-content label {
-    display: flex !important;
+    display: flex;
     align-items: flex-start;
     gap: 0.8rem; /* УМЕНЬШЕНО с 1rem */
     padding: 0.8rem 0.6rem; /* УМЕНЬШЕНО с 1rem 0.75rem */
