@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Always initialize modal handlers (even if banner is missing)
   if (manageBtn && modal) {
     manageBtn.addEventListener("click", () => {
-      if (banner) banner.classList.add("hidden"); // hide banner first
-      modal.style.display = "flex";               // ensure modal is rendered
-      void modal.offsetHeight;                    // force reflow (for Chrome)
-      modal.classList.remove("hidden");           // show modal
+      if (banner) banner.classList.add("hidden");
+      
+      // КРИТИЧНО: force reflow перед снятием .hidden для Chrome
+      void modal.offsetHeight;
+      modal.classList.remove("hidden");
     });
   }
 
@@ -26,21 +27,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (form && modal && banner) {
+  // Close modal on backdrop click
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
+
+  if (form && modal) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       localStorage.setItem("cookie-consent", "custom");
       modal.classList.add("hidden");
-      banner.classList.add("hidden");
+      if (banner) banner.classList.add("hidden");
     });
   }
 
   const acceptAllBtn = document.getElementById("cookie-accept");
-  if (acceptAllBtn && banner && modal) {
+  if (acceptAllBtn && banner) {
     acceptAllBtn.addEventListener("click", () => {
       localStorage.setItem("cookie-consent", "all");
       banner.classList.add("hidden");
-      modal.classList.add("hidden");
+      if (modal) modal.classList.add("hidden");
     });
   }
 });
