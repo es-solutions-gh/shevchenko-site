@@ -911,10 +911,6 @@ a {
   z-index: 3000;
   padding: 1rem;
   overflow-y: auto;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 #cookie-modal:not(.hidden) {
