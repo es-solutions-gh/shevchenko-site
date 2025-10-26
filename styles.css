@@ -952,7 +952,7 @@ a {
   font-weight: 600 !important;
 }
 
-#cookie-modal .cookie-modal-content form {
+#cookie-modal.show .cookie-modal-content form {
   display: flex !important;
   flex-direction: column !important;
   gap: 1rem;
@@ -960,7 +960,7 @@ a {
   opacity: 1 !important;
 }
 
-#cookie-modal .cookie-modal-content label {
+#cookie-modal.show .cookie-modal-content label {
   display: flex !important;
   align-items: flex-start !important;
   gap: 1rem;
@@ -975,8 +975,8 @@ a {
   opacity: 1 !important;
 }
 
-#cookie-modal .cookie-modal-content label strong,
-#cookie-modal .cookie-modal-content label span {
+#cookie-modal.show .cookie-modal-content label strong,
+#cookie-modal.show .cookie-modal-content label span {
   flex: 1;
   text-align: left;
   color: #333333 !important;
@@ -984,7 +984,7 @@ a {
   opacity: 1 !important;
 }
 
-#cookie-modal .cookie-modal-content label input[type="checkbox"] {
+#cookie-modal.show .cookie-modal-content label input[type="checkbox"] {
   margin-top: 2px;
   flex-shrink: 0;
   width: 20px !important;
@@ -1010,7 +1010,7 @@ a {
   cursor: not-allowed;
 }
 
-#cookie-modal .cookie-modal-content .cookie-modal-actions {
+#cookie-modal.show .cookie-modal-content .cookie-modal-actions {
   display: flex !important;
   justify-content: center;
   margin-top: 1rem;
@@ -1018,7 +1018,7 @@ a {
   opacity: 1 !important;
 }
 
-#cookie-modal .cookie-modal-content .cookie-modal-actions button {
+#cookie-modal.show .cookie-modal-content .cookie-modal-actions button {
   background: #f90 !important;
   color: #ffffff !important;
   border: none;
@@ -1033,7 +1033,7 @@ a {
   opacity: 1 !important;
 }
 
-#cookie-modal .cookie-modal-content .cookie-modal-actions button:hover {
+#cookie-modal.show .cookie-modal-content .cookie-modal-actions button:hover {
   background: #e88a00 !important;
 }
 
