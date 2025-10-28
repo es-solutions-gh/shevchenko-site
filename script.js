@@ -119,6 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (currentPath.includes("/uk/")) currentLang = "uk";
   else if (currentPath.includes("/ru/")) currentLang = "ru";
 
+  // Restore scroll position after language switch
+  const savedScroll = sessionStorage.getItem('langSwitchScroll');
+  if (savedScroll) {
+    window.scrollTo(0, parseInt(savedScroll));
+    sessionStorage.removeItem('langSwitchScroll');
+  }
+
   langButtons.forEach(({ button, menu, flag, code }) => {
     if (!button || !menu) return;
 
@@ -137,7 +144,23 @@ document.addEventListener("DOMContentLoaded", () => {
       li.addEventListener("click", () => {
         const selectedLang = li.getAttribute("data-lang");
         if (selectedLang && langData[selectedLang]) {
-          window.location.href = langData[selectedLang].path;
+          // Save current scroll position
+          sessionStorage.setItem('langSwitchScroll', window.scrollY.toString());
+
+          // Extract current page filename
+          const pathParts = currentPath.split('/');
+          const currentPage = pathParts[pathParts.length - 1] || 'index.html';
+
+          // Build new URL preserving the current page
+          let newPath;
+          if (selectedLang === 'en') {
+            // English pages can be in root or /en/ folder
+            newPath = currentPage === 'index.html' ? '/' : `/en/${currentPage}`;
+          } else {
+            newPath = `${langData[selectedLang].path}${currentPage}`;
+          }
+
+          window.location.href = newPath;
         }
       });
     });
