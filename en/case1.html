@@ -3,54 +3,107 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Case study: Turning a Soviet-era brewery into the fastest-growing regional star. 72% sales growth, market share doubled, profit tripled in 2 years.">
+  <!-- Canonical & Hreflang -->
+<link rel="canonical" href="https://shevchenko.solutions/en/case1.html">
+<link rel="alternate" hreflang="en" href="https://shevchenko.solutions/en/case1.html">
+<link rel="alternate" hreflang="ru" href="https://shevchenko.solutions/ru/case1.html">
+<link rel="alternate" hreflang="uk" href="https://shevchenko.solutions/uk/case1.html">
+<link rel="alternate" hreflang="x-default" href="https://shevchenko.solutions/en/case1.html">
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Evgeny Shevchenko">
+<meta property="og:title" content="Case Study: From Soviet-Era Brewery to Regional Leader">
+<meta property="og:description" content="72% sales growth, market share doubled, profit tripled in 2 years">
+<meta property="og:url" content="https://shevchenko.solutions/en/case1.html">
+<meta property="og:image" content="https://shevchenko.solutions/cases/c1.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="uk_UA">
+<meta property="article:author" content="Evgeny Shevchenko">
+<meta property="article:published_time" content="2003-01-15">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Case Study: From Soviet-Era Brewery to Regional Leader">
+<meta name="twitter:description" content="72% sales growth, market share doubled, profit tripled in 2 years">
+<meta name="twitter:image" content="https://shevchenko.solutions/cases/c1.jpg">
+
   <title>Case Study: From Soviet-Era Brewery to the Fastest-Growing Regional Star (Russia, 2003)</title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="stylesheet" href="/styles.css" />
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <script src="/assets/js/lang-switch.js" defer></script>
   <script src="/script.js" defer></script>
 
 </head>
 <body>
 
   <header class="header">
-    <div class="wrap">
-      <a href="index.html" class="logo">shevchenko<span class="dot">.</span>solutions</a>
-      <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+  <div class="wrap">
+    <!-- Логотип (десктоп) -->
+    <a href="index.html" class="logo desktop-only">shevchenko<span class="dot">.</span>solutions</a>
 
-      <a class="cta-link" href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
-        WANT TO DISCUSS A SIMILAR CASE?
-      </a>
+    <!-- CTA (десктоп) -->
+    <a class="cta-link desktop-only" href="#" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">
+      WANT TO DISCUSS A SIMILAR CASE?
+    </a>
 
-      <nav class="nav">
-        <a class="nav-link" href="index.html#how-i-help">How I Help</a>
-        <a class="nav-link" href="index.html#pricing">Pricing</a>
-        <a class="nav-link" href="index.html#contact">Contact</a>
-        <a class="nav-link back-link" href="index.html#case-studies">Back to Cases</a>
+    <!-- Навигация упрощенная -->
+    <nav class="nav">
+      <a class="nav-link" href="index.html#how-i-help">How I Help</a>
+      <a class="nav-link" href="index.html#pricing">Formats & Pricing</a>
+      <a class="nav-link" href="index.html#contact">Contact</a>
+      <a class="nav-link back-link" href="index.html#case-studies">Back to Cases</a>
+    </nav>
 
-        <div class="lang-switch">
-          <button id="current-lang" type="button">
-            <img id="current-flag" src="/assets/flags/ENG.svg" alt="EN">
-            <span id="current-code">ENG</span> ▾
-          </button>
-          <ul id="lang-menu" class="hidden">
-            <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
-            <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
-            <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
-          </ul>
-        </div>
-      </nav>
+    <!-- Переключатель языка (десктоп) -->
+    <div class="lang-switch desktop-only">
+      <button id="current-lang-desktop" type="button">
+        <img id="current-flag-desktop" src="/assets/flags/ENG.svg" alt="EN">
+        <span id="current-code-desktop">ENG</span> ▾
+      </button>
+      <ul id="lang-menu-desktop" class="hidden">
+        <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+        <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+        <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+      </ul>
     </div>
-  </header>
+
+    <!-- Логотип (мобильный) -->
+    <a href="index.html" class="logo mobile-only">shevchenko<span class="dot">.</span>solutions</a>
+
+    <!-- Мобильная строка: Бургер + Язык -->
+    <div class="mobile-header-row">
+      <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+      <div class="lang-switch mobile-top">
+        <button id="current-lang" type="button">
+          <img id="current-flag" src="/assets/flags/ENG.svg" alt="EN">
+          <span id="current-code">ENG</span> ▾
+        </button>
+        <ul id="lang-menu" class="hidden">
+          <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+          <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+          <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</header>
 
   <section class="section">
     <div class="container">
       <h2>🌟 Case Study: From Soviet-Era Brewery to the Fastest-Growing Regional Star (Russia, 2003)</h2>
 
       <div class="case-gallery">
-        <img src="/cases/c1.jpg" alt="Участник проекта">
-        <img src="/cases/c1b.jpg" alt="Этикетка бренда">
-        <img src="/cases/c1c.jpg" alt="Большая бутылка Uralsky Master">
+        <img src="/cases/c1.jpg" alt="Участник проекта" loading="lazy">
+        <img src="/cases/c1b.jpg" alt="Этикетка бренда" loading="lazy">
+        <img src="/cases/c1c.jpg" alt="Большая бутылка Uralsky Master" loading="lazy">
       </div>
 
       <h3>Overview</h3>
@@ -80,10 +133,10 @@
       <p>5. Uralsky Master brand became #6 in 29.5 million people region and a showcase asset for the Carlsberg Group.</p>
 
       <h3>Strategic Takeaways</h3>
-      <p>– Start with people: a strong team accelerates transformation.</p>
-      <p>– Quick wins + long-term strategy: combine immediate sales boosts with structural change.</p>
-      <p>– No sacred cows: decisive leadership (removing underperformers, investing in bold moves) is essential in turnaround.</p>
-      <p>– Culture matters: shifting mindsets was as important as improving processes.</p>
+      <p>- <strong>Start with people:</strong> a strong team accelerates transformation.</p>
+      <p>- <strong>Quick wins + long-term strategy:</strong> combine immediate sales boosts with structural change.</p>
+      <p>- <strong>No "sacred cows":</strong> decisive leadership (removing underperformers, investing in bold moves) is essential in turnaround.</p>
+      <p>- <strong>Culture matters:</strong> shifting mindsets was as important as improving processes.</p>
 
       <h3>Closing Statement</h3>
       <p>This case illustrates how disciplined leadership, modern marketing, and cultural transformation can revive even a legacy business under extreme pressure.</p>
@@ -91,12 +144,56 @@
   </section>
 
   <footer class="footer">
-    © <span id="y"></span> Evgeny Shevchenko. All rights reserved.
-  </footer>
+   © <span id="y"></span> Evgeny Shevchenko. All rights reserved.
+   <span class="footer-divider">·</span>
+   <a href="/cookie-policy.en.html">Cookie Policy</a>
+   </footer>
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
-
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "From Soviet-Era Brewery to the Fastest-Growing Regional Star",
+  "description": "Case study: Turning a struggling Soviet-style brewery into the fastest-growing regional brewery in Russia, achieving 72% sales growth and tripling profit.",
+  "author": {
+    "@type": "Person",
+    "name": "Evgeny Shevchenko",
+    "url": "https://shevchenko.solutions"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Evgeny Shevchenko"
+  },
+  "datePublished": "2003-01-15",
+  "dateModified": "2024-12-15",
+  "url": "https://shevchenko.solutions/en/case1.html",
+  "image": "https://shevchenko.solutions/cases/c1.jpg",
+  "articleSection": "Case Studies",
+  "keywords": [
+    "brewery turnaround",
+    "FMCG consulting",
+    "sales growth",
+    "market share increase",
+    "Russia",
+    "Carlsberg",
+    "commercial turnaround"
+  ],
+  "about": {
+    "@type": "Organization",
+    "name": "Zolotoy Ural Brewery",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "RU"
+      }
+    }
+  }
+}
+</script>
 </body>
 </html>

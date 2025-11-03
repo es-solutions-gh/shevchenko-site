@@ -3,7 +3,35 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>Евгений Шевченко — Консультант и Interim CEO</title>
+  <meta name="description" content="Независимый консультант и Interim CEO для проектов роста и трансформации в Европе и Центральной Азии. Специализация: turnaround, рост прибыли, комплаенс, антикризисное управление.">
+  <!-- Canonical & Hreflang -->
+<link rel="canonical" href="https://shevchenko.solutions/ru/">
+<link rel="alternate" hreflang="en" href="https://shevchenko.solutions/en/">
+<link rel="alternate" hreflang="ru" href="https://shevchenko.solutions/ru/">
+<link rel="alternate" hreflang="uk" href="https://shevchenko.solutions/uk/">
+<link rel="alternate" hreflang="x-default" href="https://shevchenko.solutions/en/">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Евгений Шевченко">
+<meta property="og:title" content="Евгений Шевченко - Консультант и Interim CEO">
+<meta property="og:description" content="Независимый консультант и Interim CEO для проектов роста и трансформации в Европе и Центральной Азии">
+<meta property="og:url" content="https://shevchenko.solutions/ru/">
+<meta property="og:image" content="https://shevchenko.solutions/assets/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="uk_UA">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Евгений Шевченко - Консультант и Interim CEO">
+<meta name="twitter:description" content="Независимый консультант и Interim CEO для проектов роста и трансформации">
+<meta name="twitter:image" content="https://shevchenko.solutions/assets/og-cover.jpg">  
+  <title>Евгений Шевченко - Консультант и Interim CEO</title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
 
 <link href="/styles.css" rel="stylesheet"/>
 <script src="/script.js" defer></script>
@@ -13,15 +41,14 @@
 
 <body>
 <header class="header">
-  
   <div class="wrap">
 
-  <!-- Логотип -->
-  <div class="logo">
+  <!-- Логотип (десктоп) -->
+  <a href="index.html" class="logo desktop-only">
     shevchenko<span class="dot">.</span>solutions
-  </div>
+  </a>
 
-  <!-- CTA (десктоп) — текст как в англ. версии -->
+  <!-- CTA (десктоп) -->
   <a class="cta-link desktop-only" href=""
      onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'}); return false;">
     БЕСПЛАТНЫЙ 30' ЗВОНОК!
@@ -30,34 +57,47 @@
   <!-- Навигация -->
   <nav class="nav">
     <a href="#about-me">Обо мне</a>
-    <a href="#how-i-help">С чем я помогаю</a>
-    <a href="#cases">Кейсы</a>
-    <a href="#testimonials">Отзывы</a>
-    <a href="#pricing">Форматы и гонорар</a>
-    <a href="#press">Публикации</a>
+    <a href="#how-i-help">Как я помогаю</a>
+    <a href="#case-studies">Кейсы</a>
+    <a href="#what-clients-say">Отзывы</a>
+    <a href="#pricing">Форматы & Цены</a>
+    <a href="#press-media">Медиа</a>
     <a href="#contact">Контакты</a>
   </nav>
 
-  <!-- Переключатель языка -->
+  <!-- Переключатель языка (десктоп) -->
   <div class="lang-switch desktop-only">
-    <button>
-      <img src="/assets/flags/RUS.svg" alt="RU" />
-      RU
+    <button id="current-lang-desktop" type="button">
+      <img id="current-flag-desktop" src="/assets/flags/RUS.svg" alt="RU">
+      <span id="current-code-desktop">RUS</span> ▾
     </button>
-    <ul class="hidden desktop-only">
-      <li onclick="window.location.href='/en/'">
-        <img src="/assets/flags/ENG.svg" alt="EN" />
-        EN
-      </li>
-      <li onclick="window.location.href='/uk/'">
-        <img src="/assets/flags/UKR.svg" alt="UA" />
-        UA
-      </li>
+    <ul id="lang-menu-desktop" class="hidden">
+      <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+      <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+      <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
     </ul>
   </div>
 
-  <!-- Мобильная строка -->
-  <div class="mobile-header-row">...</div>
+  <!-- Логотип (мобильный) -->
+  <a href="index.html" class="logo mobile-only">
+    shevchenko<span class="dot">.</span>solutions
+  </a>
+
+  <!-- Мобильная строка: Бургер + Язык -->
+  <div class="mobile-header-row">
+    <button class="burger" id="burger-btn" aria-label="Toggle navigation menu">☰</button>
+    <div class="lang-switch mobile-top">
+      <button id="current-lang" type="button">
+        <img id="current-flag" src="/assets/flags/RUS.svg" alt="RU">
+        <span id="current-code">RUS</span> ▾
+      </button>
+      <ul id="lang-menu" class="hidden">
+        <li data-lang="en"><img src="/assets/flags/ENG.svg" alt=""> ENG</li>
+        <li data-lang="uk"><img src="/assets/flags/UKR.svg" alt=""> UKR</li>
+        <li data-lang="ru"><img src="/assets/flags/RUS.svg" alt=""> RUS</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- CTA мобильная -->
   <a class="cta-link mobile-cta" href=""
@@ -72,7 +112,7 @@
   <div class="container grid">
     <div>
       <h1>Евгений Шевченко</h1>
-      <img class="mobile-only" src="/assets/portrait.png" alt="Evgeny Shevchenko"/>
+      <img class="mobile-only" src="/assets/portrait.jpg" alt="Evgeny Shevchenko"/>
       <p style="font-size:20px;margin:10px 0 22px;">
         Консультант и Interim CEO для проектов роста и трансформации в Европе и Центральной Азии
       </p>
@@ -84,7 +124,7 @@
 </ul>
 </div>
 <div class="hero-img desktop-only">
-      <img src="/assets/portrait.png" alt="Evgeny Shevchenko" />
+      <img src="/assets/portrait.jpg" alt="Evgeny Shevchenko" />
 </div>
 <div style="display:flex;justify-content:center">
 </div>
@@ -95,47 +135,48 @@
   <div class="container">
     <h2>Обо мне</h2>
     <p>Я работаю с собственниками, советами директоров и инвестиционными фондами, помогая запускать трансформацию бизнеса в нестабильных условиях: восстанавливаю прибыльность, оптимизирую расходы и создаю системы управления, готовые к масштабированию.  
-    От кризиса к лидерству — раскрываю потенциал компании через дисциплинированное исполнение, восстановление коммерческой эффективности и практичный менеджмент.  
+    От кризиса к лидерству - раскрываю потенциал компании через дисциплинированное исполнение, восстановление коммерческой эффективности и практичный менеджмент.  
     Бывший CEO (команды до 8 000 человек), один из трёх лучших CEO Украины по версии Forbes. Член советов директоров AmCham и UN Global Compact.</p>
-    <p><a class="link" href="/assets/Evgeny_Shevchenko_CV_web.pdf" target="_blank" rel="noopener">Скачать CV (PDF)</a></p>
+    <p><a class="link blue" href="/assets/Evgeny_Shevchenko_CV_web.pdf" target="_blank" rel="noopener">Скачать CV (PDF)</a></p>
   </div>
 </section>
 
 
 <section class="section" id="how-i-help">
   <div class="container">
-    <h2>С чем я помогаю</h2>
+    <h2>Как я помогаю</h2>
     <div class="cardgrid">
 
-      <div class="card">
-        <h3>📈 Рост и создание стоимости</h3>
-        <p>Помогаю компаниям растить EBITDA: совершенствую ценообразование, портфель, каналы продаж, дисциплину в управлении SG&A и оборотным капиталом - превращая волатильность в устойчивый рост.</p>
-      </div>
-
-      <div class="card">
-        <h3>🚀 Стойкие преобразования</h3>
-        <p>Стабилизирую и обновляю проблемные направления бизнеса, задаю чёткие KPI и управленческий ритм, чтобы достигнутые результаты сохранялись надолго.</p>
-      </div>
-
-      <div class="card">
-        <h3>🧭 Репутация, управление, комплаенс</h3>
-        <p>Помогаю укреплять доверие инвесторов и партнёров в сложных юрисдикциях, выстраивая прозрачные процессы, сильное управление и культуру соблюдения стандартов.</p>
-      </div>
-
-      <div class="card">
-        <h3>⛳️ Выход на новые рынки и масштабирование</h3>
-        <p>Разрабатываю и реализую стратегии выхода на новые рынки и расширения бизнеса в Европе и Центральной Азии — помогаю инвесторам из ЕС закрепляться на восточных рынках и наоборот.</p>
-      </div>
-
-      <div class="card">
-        <h3>💡 Трансформация и инновации</h3>
-        <p>Помогаю адаптировать бизнес к будущему: внедряю решения на основе данных, искусственного интеллекта и современных цепочек поставок, обеспечивая устойчивый рост даже в нестабильной среде.</p>
-      </div>
-
-      <div class="card">
-        <h3>🛟 Временное руководство</h3>
-        <p>Прихожу как CEO или COO, чтобы быстро запустить изменения и одновременно развивать внутренние компетенции, совмещая стратегические приоритеты с чётким исполнением.</p>
-      </div>
+<div class="card">
+<h3>📈  Трудно расти, сохраняя прибыльность?</h3>
+<p><strong>Рост EBITDA и стабильный денежный поток</strong></p>
+<p>Если прибыль тает, а рост непредсказуем - я помогу вам выстроить чёткое ценообразование, сбалансировать портфель и навести порядок в издержках. Из турбулентности - к устойчивому росту с результатом.</p>
+</div>
+<div class="card">
+<h3>🛠  Бизнес буксует или потерял управленческий фокус?</h3>
+<p><strong>Настоящий turnaround с долгосрочным эффектом</strong></p>
+<p>Когда бизнес-подразделение теряет темп или генерирует убытки, я вхожу, чтобы стабилизировать процессы, задать чёткое направление и перезапустить операционную модель - с KPI и ритмом, которые продолжают работать после моего выхода.</p>
+</div>
+<div class="card">
+<h3>🧭  Беспокоят внешние риски или комплаенс?</h3>
+<p><strong>Укрепите управление и защитите репутацию и активы</strong></p>
+<p>Я помогу вам оставаться в рамках закона в сложных юрисдикциях, выстраивать доверие и согласовывать интересы стейкхолдеров - чтобы сохранить право на ведение бизнеса и снизить риски.</p>
+</div>
+<div class="card">
+<h3>⛳️  Планируете выход на новые рынки, но не знаете, с чего начать?</h3>
+<p><strong>Стратегия экспансии с уверенностью в деталях</strong></p>
+<p>Будь то рост в Восточной Европе, Центральной Азии или выход в ЕС - я разрабатываю чёткий и реалистичный план запуска, с учётом местной специфики, регуляторных требований и скорости, которую вы ждёте.</p>
+</div>
+<div class="card">
+<h3>💡  Хотите обновить бизнес, но мешает "наследие прошлого"?</h3>
+<p><strong>Инновации и трансформация без потери ДНК</strong></p>
+<p>Встраиваю ИИ, аналитику и современные решения в ключевые процессы - чтобы бизнес стал устойчивее, технологичнее и готов к следующему витку изменений.</p>
+</div>
+<div class="card">
+<h3>🛟  Срочно нужен надежный лидер?</h3>
+<p><strong>Interim CEO/COO в момент, когда на счёту каждый день</strong></p>
+<p>Если команда буксует, а стратегия висит в воздухе - я подключаюсь, чтобы обеспечить движение вперёд: реализую планы, состыковываю решения акционеров с операциями "на земле" и формирую устойчивую управленческую практику.</p>
+</div>
 
     </div>
   </div>
@@ -147,41 +188,41 @@
 
       <div class="card">
         <h3>🌟 От советского наследия к лидеру регионального рынка</h3>
-        <p><i>Задача:</i> устаревшие процессы, слабые бренды, падение продаж.</p>
+        <p><i>Вызов:</i> устаревшие процессы, слабые бренды, падение продаж.</p>
         <p><i>Подход:</i> обновление команды, перезапуск бренда, развитие дистрибуции, внедрение KPI.</p>
         <p><i>Результат:</i> +72% продаж в первый год, доля 3,6% → 8,2% за два года, прибыль ×3.</p>
         <div class="actions">
-          <a class="linkbtn" href="case1.html">Подробнее</a>
+          <a class="linkbtn" href="case1.html">Читать кейс</a>
         </div>
       </div>
 
       <div class="card">
         <h3>🛡️ Защита актива стоимостью €132 млн от давления государственных структур</h3>
-        <p><i>Задача:</i> давление, проверки, сфабрикованные обвинения, риск национализации.</p>
+        <p><i>Вызов:</i> давление, проверки, сфабрикованные обвинения, риск национализации.</p>
         <p><i>Подход:</i> юридический и дипломатический щит, надёжная структура капитала, эвакуация команды, запасные планы работы.</p>
         <p><i>Результат:</i> актив сохранён, сотрудники защищены, обвинения сняты.</p>
         <div class="actions">
-          <a class="linkbtn" href="case2.html">Подробнее</a>
+          <a class="linkbtn" href="case2.html">Читать кейс</a>
         </div>
       </div>
 
       <div class="card">
         <h3>🌊 Как удержать компанию на плаву во время революции и войны</h3>
-        <p><i>Задача:</i> военные риски, бойкот бренда, петиция сотрудников, сжатие рынка.</p>
+        <p><i>Вызов:</i> военные риски, бойкот бренда, петиция сотрудников, сжатие рынка.</p>
         <p><i>Подход:</i> приоритет людям, корректный выход с рынков, репозиционирование бренда, страхование рисков.</p>
         <p><i>Результат:</i> сохранение бизнеса и репутации, новые инвестиции, №1 на рынке к 2017 году.</p>
         <div class="actions">
-          <a class="linkbtn" href="case3.html">Подробнее</a>
+          <a class="linkbtn" href="case3.html">Читать кейс</a>
         </div>
       </div>
 
       <div class="card">
         <h3>🦾 Победа в пост-COVID рознице</h3>
-        <p><i>Задача:</i> более 50% продаж в modern trade, зависимость от промо, пробелы в сервисе и логистике.</p>
+        <p><i>Вызов:</i> более 50% продаж в modern trade, зависимость от промо, пробелы в сервисе и логистике.</p>
         <p><i>Подход:</i> новая структура KAM, пересмотр условий торговли, ИИ-мониторинг полок, фокус на исполнении.</p>
         <p><i>Результат:</i> уверенный №2, статус №1 по версии клиентов.</p>
         <div class="actions">
-          <a class="linkbtn" href="case4.html">Подробнее</a>
+          <a class="linkbtn" href="case4.html">Читать кейс</a>
         </div>
       </div>
 
@@ -219,7 +260,7 @@
       <div class="card testimonial">
         <img src="/clients/c3.jpg" alt="Тимур Мусин" class="client-photo">
         <blockquote>
-          💬 «Он знает, как правильно сбалансировать P&amp;L и баланс, создавая условия для процветания бизнеса».
+          💬 «Он знает, как правильно сбалансировать P&amp;L и балансовый счет, создавая условия для процветания бизнеса».
         </blockquote>
         <p class="client-name">Тимур Мусин</p>
         <p class="client-role">Владелец Caravan Restaurant Group, Узбекистан</p>
@@ -240,23 +281,75 @@
 
 <section class="section" id="pricing">
   <div class="container">
-    <h2>Форматы и гонорар</h2>
-    <ul class="pricing">
-      <li><strong>Часовая ставка: <span style="font-size: 0.50em; color: #888; font-style: italic;"></span> €180 / час</strong> для консультаций и коротких обсуждений.</li>
-      <li><strong>Дневная ставка: <span style="font-size: 0.50em; color: #888; font-style: italic;"></span> €1 300 / день</strong> для сессий и проектной работы.</li>
-      <li><strong>Interim-роль:</strong> выполнение функций CEO/COO на определённый срок - по договоренности.</li>
-    </ul>
-    <p style="font-size:16px;opacity:.9">
-<i>Почему €1,300/день?</i>
-<p>Я обеспечиваю быстрый и измеримый результат для владельцев и инвесторов.
-С более чем 20-летним опытом работы CEO и члена совета директоров на высокорисковых рынках я умею превращать нестабильность в возможности: ускорять рост, усиливать систему управления и защищать репутацию. Я совмещаю стратегическое видение с практическим исполнением, чтобы сохранить непрерывность, быстро раскрыть возможности и оставить ваш бизнес сильнее надолго после моего ухода.
-                </p>
+    <h2>Форматы & Цены</h2>
+
+<div class="pricing-grid">
+  <div class="pricing-card">
+    <h3>🔦 Базовый Пакет</h3>
+    <p class="pricing-description">~2-часовая консультация; 1-страничный отчёт с результатами и рекомендациями; e-mail поддержка в течение 1 месяца</p>
+    <div class="pricing-amount">900 €</div>
+    <div class="pricing-period">однократно</div>
+  </div>
+
+  <div class="pricing-card">
+    <h3>💡 Стандартный Пакет</h3>
+    <p class="pricing-description">~4-часовая консультация; 3-страничный отчёт с результатами и рекомендациями; 1-часовой повторный звонок; 2 месяца поддержки</p>
+    <div class="pricing-amount">2 300 €</div>
+    <div class="pricing-period">однократно</div>
+  </div>
+
+  <div class="pricing-card">
+    <h3>💎 Премиум Пакет</h3>
+    <p class="pricing-description">~8-часовое глубокое погружение (разделение на 2 сессии) с полным анализом; 5-страничный отчёт о стратегии и плане действий; две последующие сессии; 3-месячная поддержка</p>
+    <div class="pricing-amount">4 500 €</div>
+    <div class="pricing-period">однократно</div>
+  </div>
+</div>
+
+<div class="pricing-card pricing-card-wide pricing-card-best pricing-card-horizontal">
+  <div class="pricing-badge">ЛУЧШИЙ ВЫБОР</div>
+  <div class="pricing-title">
+    <h3>🗓️ Ежемесячная поддержка с фиксированной ценой <span class="pricing-hybrid">  (гибрид)</span></h3>
+  </div>
+  <p class="pricing-description">Постоянные консультационные услуги (примерно 1/2 дня в неделю или ~20 часов в месяц); включают приоритетную поддержку и регулярные контрольные встречи.</p>
+  <div class="pricing-price">
+    <div class="pricing-amount">7 700 €</div>
+    <div class="pricing-period">в месяц</div>
+  </div>
+</div>
+
+<div class="pricing-card pricing-card-wide pricing-card-horizontal">
+  <div class="pricing-title">
+    <h3>🏭 Краткосрочная работа на месте</h3>
+  </div>
+  <p class="pricing-description">Очные консультации (например, выездная стратсессия или тренинг). <i>Расходы на проезд и проживание оплачиваются отдельно.</i></p>
+  <div class="pricing-price">
+    <div class="pricing-amount">2 500 €</div>
+    <div class="pricing-period">в день</div>
+  </div>
+</div>
+
+<div class="pricing-card pricing-card-wide pricing-card-horizontal">
+  <div class="pricing-title">
+    <h3>🛟 Временное руководство<span class="pricing-hybrid">  (гибрид)</span></h3>
+  </div>
+  <p class="pricing-description">Работа «на земле» от имени клиента, <i>min. 3 месяца</i></p>
+  <div class="pricing-price">
+    <div class="pricing-individual">Обсуждается индивидуально</div>
+    <div class="pricing-period"></div>
+  </div>
+</div>
+
+<p class="pricing-note">
+Все цены указаны без НДС. Страна, выставляющая счёт, - Португалия, поэтому в каждом случае применяется соответствующий режим НДС (23% Португалия, 0% страны ЕС и 0% - страны за пределами ЕС). Стандартная работа по всем пакетам - онлайн/видеосвязью. За выездные мероприятия взимается ежедневная ставка плюс согласованные заранее командировочные расходы, в соответствии с обычной практикой консультационных услуг.
+</p>
+
   </div>
 </section>
 
 <section class="section" id="press-media">
 <div class="container">
-<h2>Публикации</h2>
+<h2>Медиа</h2>
 <h3>Посты на LinkedIn</h3>
 <div class="posts">
 <!--
@@ -359,10 +452,10 @@
 
       <a class="press-card" href="https://forbes.ua/ratings/25-naykrashchiy-seo-03122020-666" target="_blank" rel="noopener">
         <div class="press-thumb">
-          <img src="/media/m1.png" alt="Евгений Шевченко — один из трёх лучших CEO Украины по версии Forbes в 2020 году" loading="lazy">
+          <img src="/media/m1.jpg" alt="Евгений Шевченко - один из трёх лучших CEO Украины по версии Forbes в 2020 году" loading="lazy">
         </div>
         <div class="press-title">
-          Евгений Шевченко — один из трёх лучших CEO Украины по версии Forbes в 2020 году
+          Евгений Шевченко - один из трёх лучших CEO Украины по версии Forbes в 2020 году
 
           <span class="note">Укр, 2 мин. чтения</span>
         </div>
@@ -370,7 +463,7 @@
 
       <a class="press-card" href="https://delo.ua/business/evgenij-shevchenko-carlsberg-ukraine-ob-upravlen-359148/" target="_blank" rel="noopener">
         <div class="press-thumb">
-          <img src="/media/m2.png" alt="Евгений Шевченко о делегировании полномочий и корпоративной культуре" loading="lazy">
+          <img src="/media/m2.jpg" alt="Евгений Шевченко о делегировании полномочий и корпоративной культуре" loading="lazy">
         </div>
         <div class="press-title">
           Евгений Шевченко о делегировании полномочий и корпоративной культуре
@@ -381,14 +474,14 @@
 
   <!--
   <a class="press-card" href="https://ldaily.ua/ru/interviews/my-ochikuyemo-peredbachuvanu-makroekonomichnu-polityku-shhob-biznes-zumiv-ne-tilky-vyzhyty-a-j-rozvyvatysya-v-takij-neprostij-sytuacziyi/" target="_blank" rel="noopener">
-    <div class="press-thumb"><img src="media/m3.png" alt="We expect a predictable macroeconomic policy so that business can not only survive but also develop" loading="lazy"></div>
+    <div class="press-thumb"><img src="media/m3.jpg" alt="We expect a predictable macroeconomic policy so that business can not only survive but also develop" loading="lazy"></div>
     <div class="press-title">We expect a predictable macroeconomic policy so that business can not only survive but also develop</div>
   </a>
  --> 
   
  <a class="press-card" href="https://allretail.ua/news/75409-generalniy-direktor-carlsberg-ukraine-yevgen-shevchenko-stav-odnim-iz-naykrashchih-upravlinciv-roku" target="_blank" rel="noopener">
         <div class="press-thumb">
-          <img src="/media/m4.png" alt="Евгений Шевченко вошёл в число лучших управленцев года" loading="lazy">
+          <img src="/media/m4.jpg" alt="Евгений Шевченко вошёл в число лучших управленцев года" loading="lazy">
         </div>
         <div class="press-title">
           Евгений Шевченко вошёл в число лучших управленцев года
@@ -398,7 +491,7 @@
 
   <a class="press-card" href="https://delo.ua/business/evgenij-shevchenko-seo-carlsberg-ukraine-v-ljubo-375867/" target="_blank" rel="noopener">
         <div class="press-thumb">
-          <img src="/media/m5.png" alt="Поиск возможностей для роста в каждом кризисе" loading="lazy">
+          <img src="/media/m5.jpg" alt="Поиск возможностей для роста в каждом кризисе" loading="lazy">
         </div>
         <div class="press-title">
           Поиск возможностей для роста в каждом кризисе
@@ -408,7 +501,7 @@
 
   <a class="press-card" href="https://www.talent-management.com.ua/2445-interv-yu-s-general-ny-m-direktorom-carlsberg-ukraine-evgeniem-shevchenko/" target="_blank" rel="noopener">
         <div class="press-thumb">
-          <img src="/media/m6.png" alt="Реальные действия. Настоящая культура. Подлинное лидерство." loading="lazy">
+          <img src="/media/m6.jpg" alt="Реальные действия. Настоящая культура. Подлинное лидерство." loading="lazy">
         </div>
         <div class="press-title">
           Реальные действия. Настоящая культура. Подлинное лидерство.
@@ -418,7 +511,7 @@
 
   <a class="press-card" href="https://evo.business/delo-ua-carlsberg-ukraine/" target="_blank" rel="noopener">
         <div class="press-thumb">
-          <img src="/media/m7.png" alt="Как «поженить» пивоварение и цифровые технологии" loading="lazy">
+          <img src="/media/m7.jpg" alt="Как «поженить» пивоварение и цифровые технологии" loading="lazy">
         </div>
         <div class="press-title">
           Как «поженить» пивоварение и цифровые технологии
@@ -427,20 +520,20 @@
       </a>     
 <!--
   <a class="press-card" href="https://epravda.com.ua/rus/columns/2015/10/30/565301/" target="_blank" rel="noopener">
-    <div class="press-thumb"><img src="/media/m8.png" alt="European investments are ending up in landfills" loading="lazy"></div>
+    <div class="press-thumb"><img src="/media/m8.jpg" alt="European investments are ending up in landfills" loading="lazy"></div>
     <div class="press-title">European investments are ending up in landfills</div>
   </a>
 -->
 <!--
       <a class="press-card" href="https://ukranews.com/interview/2297-evgenij-shevchenko-v-ukraine-kraftovaya-revolyutsiya-piva-poka-proishodit-v-facebook" target="_blank" rel="noopener">
-    <div class="press-thumb"><img src="/media/m9.png" alt="Evgeny Shevchenko: In Ukraine, the craft beer revolution is still happening only on Facebook" loading="lazy"></div>
+    <div class="press-thumb"><img src="/media/m9.jpg" alt="Evgeny Shevchenko: In Ukraine, the craft beer revolution is still happening only on Facebook" loading="lazy"></div>
     <div class="press-title">Evgeny Shevchenko: In Ukraine, the craft beer revolution is still happening only on Facebook</div>
   </a>
 -->
 
  <a class="press-card" href="https://brandstory.com.ua/istorii-brendov/carlsberg-ukraine-my-stroim-reputaciu-osnovannuu-na-prakticeskih-dejstviah" target="_blank" rel="noopener">
         <div class="press-thumb">
-          <img src="/media/m10.png" alt="Carlsberg Ukraine: репутация, построенная на действиях" loading="lazy">
+          <img src="/media/m10.jpg" alt="Carlsberg Ukraine: репутация, построенная на действиях" loading="lazy">
         </div>
         <div class="press-title">
           Carlsberg Ukraine: репутация, построенная на действиях
@@ -450,19 +543,19 @@
 
  <!--     
   <a class="press-card" href="https://uatv.ua/carlsberg-ukraine-v-trojke-kompanij-otmechennyh-za-osnovatelnyj-podhod-k-dostizheniyu-tsur/" target="_blank" rel="noopener">
-    <div class="press-thumb"><img src="/media/m11.png" alt="Carlsberg Ukraine – among the top three companies recognized for a thorough approach to achieving the SDGs" loading="lazy"></div>
+    <div class="press-thumb"><img src="/media/m11.jpg" alt="Carlsberg Ukraine – among the top three companies recognized for a thorough approach to achieving the SDGs" loading="lazy"></div>
     <div class="press-title">Carlsberg Ukraine – among the top three companies recognized for a thorough approach to achieving the SDGs</div>
   </a>
 -->
 <!--      
   <a class="press-card" href="https://mami.org.ua/uk/news/market-news/Rezultati-oprosa-UNIC-22-goda-vosprijatie-jeticheskih-standartov-i-politik-dobrodeteli-biznesa" target="_blank" rel="noopener">
-    <div class="press-thumb"><img src="/media/m12.png" alt="Results of the 2020 UNIC survey: Perception of ethical standards and business integrity policies" loading="lazy"></div>
+    <div class="press-thumb"><img src="/media/m12.jpg" alt="Results of the 2020 UNIC survey: Perception of ethical standards and business integrity policies" loading="lazy"></div>
     <div class="press-title">Results of the 2020 UNIC survey: Perception of ethical standards and business integrity policies</div>
   </a>
 -->
 <!--      
   <a class="press-card" href="https://thepage.ua/interview/nevozmozhno-dobitsya-rosta-ekonomiki-povyshaya-nalogi-glava-carlsberg-ukraine-o-tom-chto-zhdet-potrebitelskie-rynki" target="_blank" rel="noopener">
-    <div class="press-thumb"><img src="/media/m13.png" alt="“It’s impossible to achieve economic growth by raising taxes.” Carlsberg Ukraine CEO on what awaits consumer markets" loading="lazy"></div>
+    <div class="press-thumb"><img src="/media/m13.jpg" alt="“It’s impossible to achieve economic growth by raising taxes.” Carlsberg Ukraine CEO on what awaits consumer markets" loading="lazy"></div>
     <div class="press-title">"It’s impossible to achieve economic growth by raising taxes.” Carlsberg Ukraine CEO on what awaits consumer markets</div>
   </a>
 -->
@@ -482,11 +575,11 @@
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <b>Забронировать бесплатный 30-минутный звонок:</b>
-  <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">Zoom or Google Meet</a>
+  <a class="link blue" href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/evgeny-shevchenko?hide_gdpr_banner=1'});return false;">Zoom или Google Meet</a>
 <!-- Calendly link widget end -->
   <p>
 <b>E-mail:</b>
-<a class="link" href="mailto:evgeny@shevchenko.solutions">evgeny@shevchenko.solutions</a>
+<a class="link blue" href="mailto:evgeny@shevchenko.solutions">evgeny@shevchenko.solutions</a>
 </p>
 <p>
 <b>Мессенджеры:</b>
@@ -494,7 +587,7 @@
                 </p>
   <p>
     <b>Соцсети:</b>
-<a class="link" href="https://www.linkedin.com/in/evgeny-shevchenko-a3646012/">Linked In</a>
+<a class="link blue" href="https://www.linkedin.com/in/evgeny-shevchenko-a3646012/">Linked In</a>
 </p>
 </div>
   
@@ -502,29 +595,87 @@
 
 <footer class="footer">
   © <span id="y"></span> Евгений Шевченко. Все права защищены.
+  <span class="footer-divider">·</span>
+  <a href="/cookie-policy.ru.html">Политика Cookie</a>
 </footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+
 <!-- Cookie Consent Banner -->
-<div id="cookie-banner" style="display:none;">
-  <p>We use cookies to improve your browsing experience. By continuing to visit this site you agree to our use of cookies.</p>
-  <button id="accept-cookies">Accept</button>
+<div id="cookie-banner" class="hidden">
+  <div class="cookie-content-wrapper">
+    <p class="cookie-text-main">
+      🍪 Мы используем файлы cookie для улучшения вашего опыта использования этого сайта. Вы можете выбрать, какие типы файлов cookie принимать.
+      <a href="/cookie-policy.ru.html">Политика cookie</a>.
+    </p>
+    <div class="cookie-buttons">
+      <button id="cookie-accept">Принять все</button>
+      <button id="cookie-manage">Управлять настройками</button>
+    </div>
+  </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const banner = document.getElementById("cookie-banner");
-    const acceptBtn = document.getElementById("accept-cookies");
-
-    if (!localStorage.getItem("cookiesAccepted")) {
-      banner.style.display = "flex";
-    }
-
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookiesAccepted", "true");
-      banner.style.display = "none";
-    });
-  });
-</script>
+<!-- Cookie Preferences Modal -->
+<div id="cookie-modal" class="hidden">
+  <div class="cookie-modal-content">
+    <button id="cookie-close-modal" class="cookie-close" aria-label="Close">&times;</button>
+    <h3>Управление настройками cookie</h3>
+    <form id="cookie-form">
+      <label>
+        <input type="checkbox" checked disabled />
+        <strong>Строго необходимые cookie</strong> (Всегда активны)
+      </label>
+      <label>
+        <input type="checkbox" id="analytics-cookies" />
+        Cookie для аналитики и производительности
+      </label>
+      <label>
+        <input type="checkbox" id="marketing-cookies" />
+        Маркетинговые cookie
+      </label>
+      <div class="cookie-modal-actions">
+        <button type="submit">Сохранить настройки</button>
+      </div>
+    </form>
+  </div>
+</div>
 <!-- /Cookie Consent Banner -->
-
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Evgeny Shevchenko",
+  "alternateName": "Евгений Шевченко",
+  "jobTitle": "Консультант и Interim CEO",
+  "url": "https://shevchenko.solutions",
+  "sameAs": [
+    "https://www.linkedin.com/in/evgeny-shevchenko-a3646012"
+  ],
+  "description": "Независимый консультант и Interim CEO для проектов роста и трансформации в Европе и Центральной Азии",
+  "knowsAbout": [
+    "Business Turnaround",
+    "Crisis Management",
+    "EBITDA Growth",
+    "Interim Leadership",
+    "Corporate Governance",
+    "Compliance",
+    "Risk Management",
+    "Market Entry Strategy",
+    "Digital Transformation"
+  ],
+  "hasOccupation": {
+    "@type": "Occupation",
+    "name": "Business Consultant",
+    "occupationalCategory": "Management Consulting"
+  },
+  "workLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lisbon",
+      "addressCountry": "PT"
+    }
+  }
+}
+</script>
 </body>

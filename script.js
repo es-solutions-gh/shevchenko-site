@@ -1,46 +1,183 @@
-// Toggle mobile nav menu
-document.getElementById('burger-btn')?.addEventListener('click', function () {
-  const nav = document.querySelector('.nav');
-  nav?.classList.toggle('open');
-});
+document.addEventListener("DOMContentLoaded", () => {
+  // ====================
+  // COOKIE CONSENT
+  // ====================
+  const banner = document.getElementById("cookie-banner");
+  const modal = document.getElementById("cookie-modal");
+  const manageBtn = document.getElementById("cookie-manage");
+  const closeBtn = document.getElementById("cookie-close-modal");
+  const form = document.getElementById("cookie-form");
 
-// Toggle desktop language menu
-document.getElementById('current-lang-desktop')?.addEventListener('click', function () {
-  document.getElementById('lang-menu-desktop')?.classList.toggle('hidden');
-});
+  // Show banner only if not already accepted
+  if (banner && !localStorage.getItem("cookie-consent")) {
+    banner.classList.remove("hidden");
+  }
 
-// Toggle mobile language menu
-document.getElementById('current-lang')?.addEventListener('click', function () {
-  document.getElementById('lang-menu')?.classList.toggle('hidden');
-});
+  // Always initialize modal handlers
+  if (manageBtn && modal) {
+    manageBtn.addEventListener("click", () => {
+      if (banner) banner.classList.add("hidden");
+      modal.classList.remove("hidden");
+    });
+  }
 
-// Global language switcher — сохраняет текущий путь (главная или case)
-document.querySelectorAll('[data-lang]').forEach(item => {
-  item.addEventListener('click', () => {
-    const selectedLang = item.getAttribute('data-lang'); // 'en', 'ru', 'uk'
-    const pathParts = window.location.pathname.split('/').filter(Boolean);
+  if (closeBtn && modal) {
+    closeBtn.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+  }
 
-    let currentLang = null;
-    if (['en', 'ru', 'uk'].includes(pathParts[0])) {
-      currentLang = pathParts[0];
-    }
+  // Close modal on backdrop click
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+      }
+    });
+  }
 
-    // Удаляем язык из пути
-    const remainingPath = currentLang ? pathParts.slice(1).join('/') : pathParts.join('/');
-    const isHome = remainingPath === '' || remainingPath === 'index.html';
+  if (form && modal) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      localStorage.setItem("cookie-consent", "custom");
+      modal.classList.add("hidden");
+      if (banner) banner.classList.add("hidden");
+    });
+  }
 
-    // Если это кейс, сохраняем имя файла
-    const isCasePage = remainingPath.startsWith('case') && remainingPath.endsWith('.html');
+  const acceptAllBtn = document.getElementById("cookie-accept");
+  if (acceptAllBtn && banner) {
+    acceptAllBtn.addEventListener("click", () => {
+      localStorage.setItem("cookie-consent", "all");
+      banner.classList.add("hidden");
+      if (modal) modal.classList.add("hidden");
+    });
+  }
 
-    let newPath = `/${selectedLang}/`;
-    if (isCasePage) {
-      // Для кейсов переходим на тот же файл в другой языковой папке
-      newPath += remainingPath;
-    } else if (!isHome) {
-      // Для других страниц (если будут)
-      newPath += remainingPath;
-    }
+  // ====================
+  // MOBILE MENU
+  // ====================
+  const burger = document.getElementById("burger-btn");
+  const nav = document.querySelector(".nav");
+  const body = document.body;
 
-    window.location.href = newPath;
+  if (burger && nav) {
+    burger.addEventListener("click", () => {
+      nav.classList.toggle("open");
+      body.classList.toggle("menu-open");
+    });
+
+    // Закрытие меню при клике на ссылку
+    const navLinks = nav.querySelectorAll("a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        body.classList.remove("menu-open");
+      });
+    });
+
+    // Закрытие меню при клике вне его
+    document.addEventListener("click", (e) => {
+      if (
+        !nav.contains(e.target) &&
+        !burger.contains(e.target) &&
+        nav.classList.contains("open")
+      ) {
+        nav.classList.remove("open");
+        body.classList.remove("menu-open");
+      }
+    });
+  }
+
+  // ====================
+  // LANGUAGE SWITCHER
+  // ====================
+  const langButtons = [
+    {
+      button: document.getElementById("current-lang"),
+      menu: document.getElementById("lang-menu"),
+      flag: document.getElementById("current-flag"),
+      code: document.getElementById("current-code"),
+    },
+    {
+      button: document.getElementById("current-lang-desktop"),
+      menu: document.getElementById("lang-menu-desktop"),
+      flag: document.getElementById("current-flag-desktop"),
+      code: document.getElementById("current-code-desktop"),
+    },
+  ];
+
+  const langData = {
+    en: { flag: "/assets/flags/ENG.svg", code: "ENG", path: "/en/" },
+    uk: { flag: "/assets/flags/UKR.svg", code: "UKR", path: "/uk/" },
+    ru: { flag: "/assets/flags/RUS.svg", code: "RUS", path: "/ru/" },
+  };
+
+  // Определяем текущий язык из URL
+  const currentPath = window.location.pathname;
+  let currentLang = "en";
+  if (currentPath.includes("/uk/")) currentLang = "uk";
+  else if (currentPath.includes("/ru/")) currentLang = "ru";
+
+  // Restore scroll position after language switch
+  const savedScroll = sessionStorage.getItem('langSwitchScroll');
+  if (savedScroll) {
+    window.scrollTo(0, parseInt(savedScroll));
+    sessionStorage.removeItem('langSwitchScroll');
+  }
+
+  langButtons.forEach(({ button, menu, flag, code }) => {
+    if (!button || !menu) return;
+
+    // Устанавливаем текущий язык
+    if (flag) flag.src = langData[currentLang].flag;
+    if (code) code.textContent = langData[currentLang].code;
+
+    // Открытие/закрытие меню
+    button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menu.classList.toggle("hidden");
+    });
+
+    // Выбор языка
+    menu.querySelectorAll("li").forEach((li) => {
+      li.addEventListener("click", () => {
+        const selectedLang = li.getAttribute("data-lang");
+        if (selectedLang && langData[selectedLang]) {
+          // Save current scroll position
+          sessionStorage.setItem('langSwitchScroll', window.scrollY.toString());
+
+          // Extract current page filename
+          const pathParts = currentPath.split('/');
+          const currentPage = pathParts[pathParts.length - 1] || 'index.html';
+
+          // Build new URL preserving the current page
+          let newPath;
+          if (selectedLang === 'en') {
+            // English pages can be in root or /en/ folder
+            newPath = currentPage === 'index.html' ? '/' : `/en/${currentPage}`;
+          } else {
+            newPath = `${langData[selectedLang].path}${currentPage}`;
+          }
+
+          window.location.href = newPath;
+        }
+      });
+    });
   });
+
+  // Закрытие меню языка при клике вне его
+  document.addEventListener("click", () => {
+    langButtons.forEach(({ menu }) => {
+      if (menu) menu.classList.add("hidden");
+    });
+  });
+
+  // ====================
+  // CALENDLY WIDGET
+  // ====================
+  const calendlyScript = document.createElement("script");
+  calendlyScript.src = "https://assets.calendly.com/assets/external/widget.js";
+  calendlyScript.async = true;
+  document.head.appendChild(calendlyScript);
 });
